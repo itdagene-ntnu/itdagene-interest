@@ -1,0 +1,6 @@
+.next
+coverage
+node_modules
+__generated__
+schema
+flow-typed
