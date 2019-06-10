@@ -16,7 +16,7 @@ interface FormValues {
 const placeholder: FormValues = {
   companyName: 'Company AS',
   contactPerson: 'John Doe',
-  contactEmail: 'name.name@example.com',
+  contactEmail: 'john.doe@example.com',
   contactTlf: '00 00 00 00',
   wishes: '',
   message: ''
