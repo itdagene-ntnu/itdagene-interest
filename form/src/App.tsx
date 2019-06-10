@@ -1,30 +1,21 @@
-import React from "react";
-import "./App.css";
-import info from "./text.json";
-import logo from "./itdagene.svg";
-import Container from "./components/Container";
-import Form from "./components/IntrerestForm";
+import React from 'react';
+import './App.css';
+import Container from './components/Container';
+import IntrerestForm from './components/IntrerestForm';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="header">
-        <img src={logo} className="logo" alt="logo" />
-        <Container title="Interesseskjema 2020">
-          <div>
-            <h4 style={{ textAlign: "center", fontStyle: "italic" }}>
-              {info.intro}
-            </h4>
-
-            <h4 style={{ textAlign: "center", fontWeight: 400 }}>
-              {info.description}
-            </h4>
-            <Form />
-          </div>
-        </Container>
-      </header>
-    </div>
-  );
-};
+const App: React.FC = (): JSX.Element => (
+  <div className="App">
+    <header className="header">
+      <img
+        src="https://cdn.itdagene.no/itdagene.svg"
+        className="logo"
+        alt="logo"
+      />
+    </header>
+    <Container title={`Interesseskjema ${new Date().getFullYear()}`}>
+      <IntrerestForm />
+    </Container>
+  </div>
+);
 
 export default App;

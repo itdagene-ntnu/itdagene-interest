@@ -6,8 +6,6 @@
 
 .submit {
   display: block;
-  -webkit-border-radius: 7;
-  -moz-border-radius: 7;
   border-radius: 7px;
   color: #ffffff;
   font-size: 20px;
@@ -24,94 +22,63 @@
   transition: 0.2s;
 }
 
-.aside {
+.section {
   margin-top: 30px;
   padding: 30px;
   padding-bottom: 50px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   border: 3px dashed #bbb;
   border-radius: 10px;
 }
 
-.aside-half {
-  width: 45%;
-}
-
-.aside-third {
-  width: 27%;
-}
-
-.formInput {
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
+textarea {
+  height: 100px;
   font-size: 14px;
-  background: #efefef;
+  padding: 5px;
   border-radius: 5px;
-  border-bottom: 1px solid #3cb0fd;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  color: #444;
-}
-
-.formSelect {
-  width: 100%;
-  height: 30px;
-  width: 200px;
-  box-sizing: border-box;
-  font-size: 14px;
-  background: #efefef;
-  border-radius: 5px;
-  border-bottom: 1px solid #3cb0fd;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  color: #444;
-}
-
-.label-select {
-  display: flex;
-  justify-content: space-between;
-}
-
-.formInput:focus,
-.formSelect:focus,
-.textarea,
-textarea:focus,
-select:focus,
-input:focus {
-  outline: none;
-  background: #e2e2e2;
+  border: 1px solid #bbb;
+  resize: none;
 }
 
 ::placeholder {
   color: #bbb;
-  font-style: italic;
 }
 
-.label {
+label {
   display: inline-block;
-  width: 100%;
   padding-bottom: 10px;
+  outline: none;
 }
 
-.label input {
-  height: 16px;
-  width: 16px;
+label input {
+  height: 14px;
+  width: 14px;
 }
 
-.textarea {
+input {
+  padding: 0.5rem;
+  font-size: 16px;
   width: 100%;
-  height: 80%;
-  font-size: 14px;
-  padding: 5px;
-  background: #efefef;
-  border-radius: 5px;
-  border-bottom: 1px solid #3cb0fd;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007eff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 0 3px rgba(0, 126, 255, 0.1);
+  outline: none;
+}
+
+input.error {
+  border-color: red;
+}
+
+.input-feedback {
+  color: red;
+  margin-top: 0.25rem;
 }

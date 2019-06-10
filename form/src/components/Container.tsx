@@ -1,12 +1,12 @@
-import React from "react";
-import "./Container.css";
+import React from 'react';
+import './Container.css';
 
 interface Props {
   title: string;
   children?: JSX.Element[] | JSX.Element | string;
 }
 
-const Container = (props: Props) => {
+const Container = (props: Props): JSX.Element => {
   return (
     <div className="box shadow">
       <h1 className="title">{props.title}</h1>
