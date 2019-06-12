@@ -3,8 +3,10 @@ import React from 'react';
 import * as Yup from 'yup';
 import './InterestForm.css';
 import info from '../utils/text.json';
+import keys from '../utils/keys.json';
 import { submitHandler } from '../utils/handler';
 import { Section } from './Section';
+import Recaptcha from 'react-recaptcha';
 
 export interface FormValues {
   companyName: string;
@@ -14,6 +16,7 @@ export interface FormValues {
   wishes: string;
   marathon: string;
   message: string;
+  recaptcha: string;
 }
 
 const initialValues: FormValues = {
@@ -23,7 +26,8 @@ const initialValues: FormValues = {
   contactTlf: '',
   wishes: '',
   marathon: '',
-  message: ''
+  message: '',
+  recaptcha: ''
 };
 
 const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
@@ -50,246 +54,290 @@ const validationSchema = Yup.object().shape({
   marathon: Yup.string()
     .required('Påkrevd felt')
     .matches(regex, 'Ugyldig karakterer'),
-  message: Yup.string().max(300, 'Max 300 bokstaver')
+  message: Yup.string().max(300, 'Max 300 bokstaver'),
+  recaptcha: Yup.string().required('Vennligst bekreft vår recaptcha')
 });
 
-const InterestForm = (): JSX.Element => (
-  <Formik
-    initialValues={initialValues}
-    onSubmit={(values, { setSubmitting }): void => {
-      submitHandler(values);
-      setSubmitting(false);
-    }}
-    validationSchema={validationSchema}
-  >
-    {(props: FormikProps<FormValues>): JSX.Element => {
-      const {
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      } = props;
-      return (
-        <form onSubmit={handleSubmit}>
-          <Section header="Bedriften" text={info.company}>
-            <h3>Bedriftsnavn*</h3>
-            <Field
-              id="companyName"
-              type="text"
-              value={values.companyName}
-              name="companyName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.companyName && touched.companyName
-                  ? 'text-input error'
-                  : 'text-input'
-              }
-            />
-            <>
-              {touched.companyName && errors.companyName && (
-                <div className="input-feedback">{errors.companyName}</div>
-              )}
-            </>
-          </Section>
+interface Props {
+  handleSubmit: (success: boolean) => void;
+}
 
-          <Section header="Kontaktpersonen" text={info.person}>
-            <h3>Navn*</h3>
-            <Field
-              id="contactPerson"
-              type="text"
-              value={values.contactPerson}
-              name="contactPerson"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.contactPerson && touched.contactPerson
-                  ? 'text-input error'
-                  : 'text-input'
-              }
-            />
-            <>
-              {touched.contactPerson && errors.contactPerson && (
-                <div className="input-feedback">{errors.contactPerson}</div>
-              )}
-            </>
+class InterestForm extends React.Component<Props> {
+  public componentDidMount(): void {
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }
 
-            <h3>Epost*</h3>
-            <Field
-              id="contactEmail"
-              type="email"
-              value={values.contactEmail}
-              name="contactEmail"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.contactEmail && touched.contactEmail
-                  ? 'text-input error'
-                  : 'text-input'
-              }
-            />
-            <>
-              {touched.contactEmail && errors.contactEmail && (
-                <div className="input-feedback">{errors.contactEmail}</div>
-              )}
-            </>
-
-            <h3>Telefon*</h3>
-            <Field
-              id="contactTlf"
-              type="text"
-              value={values.contactTlf}
-              name="contactTlf"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.contactTlf && touched.contactTlf
-                  ? 'text-input error'
-                  : 'text-input'
-              }
-            />
-            <>
-              {touched.contactTlf && errors.contactTlf && (
-                <div className="input-feedback">{errors.contactTlf}</div>
-              )}
-            </>
-          </Section>
-
-          <Section header="Ønsker" text={info.wishes}>
-            <h3>Ønsket dag*</h3>
-            <span className="infoText">{info.day}</span>
-            <div
-              className={
-                errors.wishes && touched.wishes
-                  ? 'divNoError divError'
-                  : 'divNoError'
-              }
-            >
-              <label>
+  public render(): JSX.Element {
+    console.log(this.props);
+    return (
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, { setSubmitting }): void => {
+          submitHandler(values, this.props.handleSubmit);
+          setSubmitting(false);
+        }}
+        validationSchema={validationSchema}
+      >
+        {(props: FormikProps<FormValues>): JSX.Element => {
+          const {
+            values,
+            touched,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue
+          } = props;
+          return (
+            <form onSubmit={handleSubmit}>
+              <Section header="Bedriften" text={info.company}>
+                <h3>Bedriftsnavn*</h3>
                 <Field
-                  id="wishes"
-                  value="Dag 1"
-                  type="radio"
-                  name="wishes"
+                  id="companyName"
+                  type="text"
+                  value={values.companyName}
+                  name="companyName"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  className={
+                    errors.companyName && touched.companyName
+                      ? 'text-input error'
+                      : 'text-input'
+                  }
                 />
-                Mandag 9.september
-              </label>
-              <label>
-                <Field
-                  id="wishes"
-                  value="Dag 2"
-                  type="radio"
-                  name="wishes"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                Tirsdag 10.september
-              </label>
-              <label>
-                <Field
-                  id="wishes"
-                  value="Ingen"
-                  type="radio"
-                  name="wishes"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                Ingen prioritering
-              </label>
-            </div>
-            <>
-              {touched.wishes && errors.wishes && (
-                <div className="input-feedback">{errors.wishes}</div>
-              )}
-            </>
+                <>
+                  {touched.companyName && errors.companyName && (
+                    <div className="input-feedback">{errors.companyName}</div>
+                  )}
+                </>
+              </Section>
 
-            <h3>Ønsker dere å delta på sommerjobbmaraton*</h3>
-            <span className="infoText">{info.marathon}</span>
-            <div
-              className={
-                errors.marathon && touched.marathon
-                  ? 'divNoError divError'
-                  : 'divNoError'
-              }
-            >
-              <label className="label">
+              <Section header="Kontaktpersonen" text={info.person}>
+                <h3>Navn*</h3>
                 <Field
-                  id="marathon"
-                  value="Ja"
-                  type="radio"
-                  name="marathon"
+                  id="contactPerson"
+                  type="text"
+                  value={values.contactPerson}
+                  name="contactPerson"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  className={
+                    errors.contactPerson && touched.contactPerson
+                      ? 'text-input error'
+                      : 'text-input'
+                  }
                 />
-                Ja
-              </label>
-              <label className="label">
+                <>
+                  {touched.contactPerson && errors.contactPerson && (
+                    <div className="input-feedback">{errors.contactPerson}</div>
+                  )}
+                </>
+
+                <h3>Epost*</h3>
                 <Field
-                  id="marathon"
-                  value="Nei"
-                  type="radio"
-                  name="marathon"
+                  id="contactEmail"
+                  type="email"
+                  value={values.contactEmail}
+                  name="contactEmail"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  className={
+                    errors.contactEmail && touched.contactEmail
+                      ? 'text-input error'
+                      : 'text-input'
+                  }
                 />
-                Nei
-              </label>
-              <label className="label">
+                <>
+                  {touched.contactEmail && errors.contactEmail && (
+                    <div className="input-feedback">{errors.contactEmail}</div>
+                  )}
+                </>
+
+                <h3>Telefon*</h3>
                 <Field
-                  id="marathon"
-                  value="Vet ikke enda"
-                  type="radio"
-                  name="marathon"
+                  id="contactTlf"
+                  type="text"
+                  value={values.contactTlf}
+                  name="contactTlf"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  className={
+                    errors.contactTlf && touched.contactTlf
+                      ? 'text-input error'
+                      : 'text-input'
+                  }
                 />
-                Vet ikke enda
-              </label>
-            </div>
-            <>
-              {touched.marathon && errors.marathon && (
-                <div className="input-feedback">{errors.marathon}</div>
-              )}
-            </>
+                <>
+                  {touched.contactTlf && errors.contactTlf && (
+                    <div className="input-feedback">{errors.contactTlf}</div>
+                  )}
+                </>
+              </Section>
 
-            <h3>Andre henvendelser</h3>
-            <span className="infoText">{info.other}</span>
-            <>
-              <Field
-                id="message"
-                value={values.message}
-                component="textarea"
-                name="message"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="Frivillig felt..."
-                className={
-                  errors.message && touched.message
-                    ? 'textarea error'
-                    : 'textarea'
-                }
-              />
+              <Section header="Ønsker" text={info.wishes}>
+                <h3>Ønsket dag*</h3>
+                <span className="infoText">{info.day}</span>
+                <div
+                  className={
+                    errors.wishes && touched.wishes
+                      ? 'divNoError divError'
+                      : 'divNoError'
+                  }
+                >
+                  <label>
+                    <Field
+                      id="wishes"
+                      value="Dag 1"
+                      type="radio"
+                      name="wishes"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Mandag 9.september
+                  </label>
+                  <label>
+                    <Field
+                      id="wishes"
+                      value="Dag 2"
+                      type="radio"
+                      name="wishes"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Tirsdag 10.september
+                  </label>
+                  <label>
+                    <Field
+                      id="wishes"
+                      value="Ingen"
+                      type="radio"
+                      name="wishes"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Ingen prioritering
+                  </label>
+                </div>
+                <>
+                  {touched.wishes && errors.wishes && (
+                    <div className="input-feedback">{errors.wishes}</div>
+                  )}
+                </>
 
-              {touched.message && errors.message && (
-                <div className="input-feedback">{errors.message}</div>
-              )}
-            </>
-          </Section>
+                <h3>Ønsker dere å delta på sommerjobbmaraton*</h3>
+                <span className="infoText">{info.marathon}</span>
+                <div
+                  className={
+                    errors.marathon && touched.marathon
+                      ? 'divNoError divError'
+                      : 'divNoError'
+                  }
+                >
+                  <label className="label">
+                    <Field
+                      id="marathon"
+                      value="Ja"
+                      type="radio"
+                      name="marathon"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Ja
+                  </label>
+                  <label className="label">
+                    <Field
+                      id="marathon"
+                      value="Nei"
+                      type="radio"
+                      name="marathon"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Nei
+                  </label>
+                  <label className="label">
+                    <Field
+                      id="marathon"
+                      value="Vet ikke enda"
+                      type="radio"
+                      name="marathon"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    Vet ikke enda
+                  </label>
+                </div>
+                <>
+                  {touched.marathon && errors.marathon && (
+                    <div className="input-feedback">{errors.marathon}</div>
+                  )}
+                </>
 
-          <div className="submit-container">
-            <button type="submit" disabled={isSubmitting} className="submit">
-              Send inn!
-            </button>
-          </div>
-        </form>
-      );
-    }}
-  </Formik>
-);
+                <h3>Andre henvendelser</h3>
+                <span className="infoText">{info.other}</span>
+                <>
+                  <Field
+                    id="message"
+                    value={values.message}
+                    component="textarea"
+                    name="message"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Frivillig felt..."
+                    className={
+                      errors.message && touched.message
+                        ? 'textarea error'
+                        : 'textarea'
+                    }
+                  />
+
+                  {touched.message && errors.message && (
+                    <div className="input-feedback">{errors.message}</div>
+                  )}
+                </>
+              </Section>
+
+              <div className="center">
+                <Recaptcha
+                  sitekey={keys.SITEKEY}
+                  id="recaptcha"
+                  render="explicit"
+                  theme="light"
+                  size="normal"
+                  value={values.recaptcha}
+                  verifyCallback={(response: string): void => {
+                    setFieldValue('recaptcha', response);
+                  }}
+                  onloadCallback={(): void => {
+                    console.log('reCAPTCHA loaded');
+                  }}
+                />
+
+                {touched.recaptcha && errors.recaptcha && (
+                  <div className="input-feedback">{errors.recaptcha}</div>
+                )}
+              </div>
+
+              <div className="center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="submit"
+                >
+                  Send inn!
+                </button>
+              </div>
+            </form>
+          );
+        }}
+      </Formik>
+    );
+  }
+}
 
 export default InterestForm;

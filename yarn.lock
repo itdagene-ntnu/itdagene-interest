@@ -1245,6 +1245,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-recaptcha@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react-recaptcha/-/react-recaptcha-2.3.3.tgz#700369afa4d32e6e1fa08166fe73a717931fe8e0"
+  integrity sha512-1IdhJxBbPN+QL/eARSl/qwV2+03kwewJmZ43CWJJoGVZd4S4wGiascCl1HVe8PRtNPzXDqAi+nXIufvEDIsAPg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@16.8.16":
   version "16.8.16"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.16.tgz#2bf980b4fb29cceeb01b2c139b3e185e57d3e08e"
@@ -8432,6 +8439,11 @@ react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+
+react-recaptcha@^2.3.10:
+  version "2.3.10"
+  resolved "https://registry.yarnpkg.com/react-recaptcha/-/react-recaptcha-2.3.10.tgz#1f7a001f24ab7e1a323fcf1fd8644afecb56f7da"
+  integrity sha512-IyanbozsYCuHvTYDuskZTIEcRAMG/sdvAu5b29iQWoC8Kd3Zk9WGCv2oNxh6RfGHvSvgHAyaLjmC6ei/yMsJ7g==
 
 react-scripts@3.0.0:
   version "3.0.0"
