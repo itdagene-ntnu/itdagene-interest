@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Container from './components/Container';
-import IntrerestForm from './components/IntrerestForm';
+import InterestForm from './components/InterestForm';
 
 const App: React.FC = (): JSX.Element => (
   <div className="App">
@@ -13,7 +13,7 @@ const App: React.FC = (): JSX.Element => (
       />
     </header>
     <Container title={`Interesseskjema ${new Date().getFullYear()}`}>
-      <IntrerestForm />
+      <InterestForm />
     </Container>
   </div>
 );

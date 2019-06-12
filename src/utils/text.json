@@ -1,6 +1,8 @@
 {
   "company": "Navnet på bedriften du representerer.",
   "person": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
-  "wishes": "Vi ønsker å vite litt om hva din bedrift sine ønsker.",
-  "prioritering": "Standtid er fra kl. 10.00 til kl. 16:00 begge dagene"
+  "wishes": "Vi ønsker å vite litt om hva din bedrift ønsker.",
+  "day": "Standperioden vil vare fra kl. 10.00 til kl. 16:00...",
+  "marathon": "Sommerjobbmaraton er...",
+  "other": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her."
 }

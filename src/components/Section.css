@@ -1,0 +1,14 @@
+.sectionHeader {
+  margin-top: 50px;
+}
+
+.insertionFields {
+  margin-top: 30px;
+  padding: 30px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px dashed #bbb;
+  border-radius: 10px;
+}

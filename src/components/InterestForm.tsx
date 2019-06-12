@@ -1,71 +1,68 @@
-import { Field, Formik } from 'formik';
+import { Field, Formik, FormikProps } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import './InterestForm.css';
 import info from '../utils/text.json';
+import { submitHandler } from '../utils/handler';
+import { Section } from './Section';
 
-interface FormValues {
+export interface FormValues {
   companyName: string;
   contactPerson: string;
   contactEmail: string;
   contactTlf: string;
   wishes: string;
+  marathon: string;
   message: string;
 }
 
-const placeholder: FormValues = {
-  companyName: 'Company AS',
-  contactPerson: 'John Doe',
-  contactEmail: 'john.doe@example.com',
-  contactTlf: '00 00 00 00',
-  wishes: '',
-  message: ''
-};
-
-interface SectionProps {
-  header: string;
-  text: string;
-  children: JSX.Element[] | JSX.Element;
-}
-
-const Section = (props: SectionProps): JSX.Element => (
-  <>
-    <h2 style={{ marginTop: '50px' }}>{props.header}</h2>
-    <p>{props.text}</p>
-    <div className="section">{props.children}</div>
-  </>
-);
-
-const initialValues = {
+const initialValues: FormValues = {
   companyName: '',
   contactPerson: '',
   contactEmail: '',
   contactTlf: '',
   wishes: '',
+  marathon: '',
   message: ''
 };
 
+const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
+
 const validationSchema = Yup.object().shape({
-  companyName: Yup.string().required('Bedriftsnavn er påkrevd'),
-  contactPerson: Yup.string().required('Kontaktpersonen er påkrevd'),
+  companyName: Yup.string()
+    .required('Bedriftsnavn er påkrevd')
+    .matches(regex, 'Ugyldig karakterer'),
+  contactPerson: Yup.string()
+    .required('Kontaktpersonen er påkrevd')
+    .matches(regex, 'Ugyldig karakterer'),
   contactEmail: Yup.string()
     .required('Epost er påkrevd')
     .email('Epost må være på lovlig format'),
-  contactTlf: Yup.string().required('Telefonnummer er påkrevd'),
-  wishes: Yup.string().required(),
-  marathon: Yup.string().required(),
-  message: Yup.string()
+  contactTlf: Yup.string()
+    .required('Telefonnummer er påkrevd')
+    .matches(
+      /^([+,-, ,0-9,(,)]){4,15}/,
+      'Telefonnummer må være på lovlig format'
+    ),
+  wishes: Yup.string()
+    .required('Påkrevd felt')
+    .matches(regex, 'Ugyldig karakterer'),
+  marathon: Yup.string()
+    .required('Påkrevd felt')
+    .matches(regex, 'Ugyldig karakterer'),
+  message: Yup.string().max(300, 'Max 300 bokstaver')
 });
 
 const InterestForm = (): JSX.Element => (
   <Formik
     initialValues={initialValues}
-    onSubmit={(values, { setSubmitting }) => {
-      console.log(values);
+    onSubmit={(values, { setSubmitting }): void => {
+      submitHandler(values);
+      setSubmitting(false);
     }}
     validationSchema={validationSchema}
   >
-    {(props: any) => {
+    {(props: FormikProps<FormValues>): JSX.Element => {
       const {
         values,
         touched,
@@ -78,13 +75,12 @@ const InterestForm = (): JSX.Element => (
       return (
         <form onSubmit={handleSubmit}>
           <Section header="Bedriften" text={info.company}>
-            <h3>Bedriftsnavn</h3>
+            <h3>Bedriftsnavn*</h3>
             <Field
               id="companyName"
               type="text"
               value={values.companyName}
               name="companyName"
-              placeholder={placeholder.companyName}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
@@ -101,13 +97,12 @@ const InterestForm = (): JSX.Element => (
           </Section>
 
           <Section header="Kontaktpersonen" text={info.person}>
-            <h3>Navn</h3>
+            <h3>Navn*</h3>
             <Field
               id="contactPerson"
               type="text"
               value={values.contactPerson}
               name="contactPerson"
-              placeholder={placeholder.contactPerson}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
@@ -122,13 +117,12 @@ const InterestForm = (): JSX.Element => (
               )}
             </>
 
-            <h3>Epost</h3>
+            <h3>Epost*</h3>
             <Field
               id="contactEmail"
               type="email"
               value={values.contactEmail}
               name="contactEmail"
-              placeholder={placeholder.contactEmail}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
@@ -143,13 +137,12 @@ const InterestForm = (): JSX.Element => (
               )}
             </>
 
-            <h3>Telefon</h3>
+            <h3>Telefon*</h3>
             <Field
               id="contactTlf"
               type="text"
               value={values.contactTlf}
               name="contactTlf"
-              placeholder={placeholder.contactTlf}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
@@ -166,8 +159,15 @@ const InterestForm = (): JSX.Element => (
           </Section>
 
           <Section header="Ønsker" text={info.wishes}>
-            <h3>Ønsket dag</h3>
-            <>
+            <h3>Ønsket dag*</h3>
+            <span className="infoText">{info.day}</span>
+            <div
+              className={
+                errors.wishes && touched.wishes
+                  ? 'divNoError divError'
+                  : 'divNoError'
+              }
+            >
               <label>
                 <Field
                   id="wishes"
@@ -177,7 +177,7 @@ const InterestForm = (): JSX.Element => (
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                Dag 1: Mandag 8.september
+                Mandag 9.september
               </label>
               <label>
                 <Field
@@ -188,12 +188,12 @@ const InterestForm = (): JSX.Element => (
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                Dag 2: Tirsdag 9.september
+                Tirsdag 10.september
               </label>
               <label>
                 <Field
                   id="wishes"
-                  value="-"
+                  value="Ingen"
                   type="radio"
                   name="wishes"
                   onChange={handleChange}
@@ -201,10 +201,22 @@ const InterestForm = (): JSX.Element => (
                 />
                 Ingen prioritering
               </label>
+            </div>
+            <>
+              {touched.wishes && errors.wishes && (
+                <div className="input-feedback">{errors.wishes}</div>
+              )}
             </>
 
-            <h3>Ønsker dere å delta på sommerjobbmaraton</h3>
-            <>
+            <h3>Ønsker dere å delta på sommerjobbmaraton*</h3>
+            <span className="infoText">{info.marathon}</span>
+            <div
+              className={
+                errors.marathon && touched.marathon
+                  ? 'divNoError divError'
+                  : 'divNoError'
+              }
+            >
               <label className="label">
                 <Field
                   id="marathon"
@@ -227,16 +239,45 @@ const InterestForm = (): JSX.Element => (
                 />
                 Nei
               </label>
+              <label className="label">
+                <Field
+                  id="marathon"
+                  value="Vet ikke enda"
+                  type="radio"
+                  name="marathon"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Vet ikke enda
+              </label>
+            </div>
+            <>
+              {touched.marathon && errors.marathon && (
+                <div className="input-feedback">{errors.marathon}</div>
+              )}
             </>
 
             <h3>Andre henvendelser</h3>
+            <span className="infoText">{info.other}</span>
             <>
               <Field
+                id="message"
+                value={values.message}
                 component="textarea"
                 name="message"
-                className="textarea"
-                placeholder={placeholder.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Frivillig felt..."
+                className={
+                  errors.message && touched.message
+                    ? 'textarea error'
+                    : 'textarea'
+                }
               />
+
+              {touched.message && errors.message && (
+                <div className="input-feedback">{errors.message}</div>
+              )}
             </>
           </Section>
 
