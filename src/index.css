@@ -24,14 +24,29 @@ a,
 span,
 button {
   font-family: rawline;
+  word-break: break-all;
+}
+
+h2 {
+  font-size: 1.3em;
 }
 
 h3 {
+  font-size: 1em;
   margin: 10px 0 5px;
 }
 
 p {
+  font-size: 14px;
   margin: 10px 0 5px;
+}
+
+span {
+  font-size: 14px;
+}
+
+label {
+  font-size: 14px;
 }
 
 a {
