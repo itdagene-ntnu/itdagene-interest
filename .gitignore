@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 keys.json
+client_secret.json
+sheet_info.json

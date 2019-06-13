@@ -13,7 +13,7 @@ export interface FormValues {
   contactPerson: string;
   contactEmail: string;
   contactTlf: string;
-  wishes: string;
+  day: string;
   marathon: string;
   message: string;
   recaptcha: string;
@@ -24,7 +24,7 @@ const initialValues: FormValues = {
   contactPerson: '',
   contactEmail: '',
   contactTlf: '',
-  wishes: '',
+  day: '',
   marathon: '',
   message: '',
   recaptcha: ''
@@ -48,7 +48,7 @@ const validationSchema = Yup.object().shape({
       /^([+,-, ,0-9,(,)]){4,15}/,
       'Telefonnummer må være på lovlig format'
     ),
-  wishes: Yup.string()
+  day: Yup.string()
     .required('Påkrevd felt')
     .matches(regex, 'Ugyldig karakterer'),
   marathon: Yup.string()
@@ -179,22 +179,22 @@ class InterestForm extends React.Component<Props> {
                 </>
               </Section>
 
-              <Section header="Ønsker" text={info.wishes}>
+              <Section header="Ønsker" text={info.day}>
                 <h3>Ønsket dag*</h3>
                 <span className="infoText">{info.day}</span>
                 <div
                   className={
-                    errors.wishes && touched.wishes
+                    errors.day && touched.day
                       ? 'divNoError divError'
                       : 'divNoError'
                   }
                 >
                   <label>
                     <Field
-                      id="wishes"
+                      id="day"
                       value="Dag 1"
                       type="radio"
-                      name="wishes"
+                      name="day"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -202,10 +202,10 @@ class InterestForm extends React.Component<Props> {
                   </label>
                   <label>
                     <Field
-                      id="wishes"
+                      id="day"
                       value="Dag 2"
                       type="radio"
-                      name="wishes"
+                      name="day"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -213,10 +213,10 @@ class InterestForm extends React.Component<Props> {
                   </label>
                   <label>
                     <Field
-                      id="wishes"
+                      id="day"
                       value="Ingen"
                       type="radio"
-                      name="wishes"
+                      name="day"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -224,8 +224,8 @@ class InterestForm extends React.Component<Props> {
                   </label>
                 </div>
                 <>
-                  {touched.wishes && errors.wishes && (
-                    <div className="input-feedback">{errors.wishes}</div>
+                  {touched.day && errors.day && (
+                    <div className="input-feedback">{errors.day}</div>
                   )}
                 </>
 
