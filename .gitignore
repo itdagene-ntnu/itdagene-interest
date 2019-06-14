@@ -22,6 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-keys.json
 client_secret.json
+server_secret.json
 sheet_info.json

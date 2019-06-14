@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const newInterest = require('./sheethandler');
+const interestHandler = require('./interestHandler');
+const recaptchaHandler = require('./recaptchaHandler');
 
 const app = express();
 const port = 8000;
@@ -19,21 +20,25 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post('/', function(req, res) {
+app.post('/', async function(req, res) {
   const entry = req.body;
-  if (entry == undefined) {
-    res.sendStatus(500);
+  console.log(req);
+
+  // Denne skal sjekke recaptcha, og retunerer et svar
+  response = await recaptchaHandler(entry.recaptcha);
+  console.log('RESPONSE', response);
+
+  if (response.data.success) {
+    console.log('recapatcha was good');
+    interestHandler(entry);
+
+    res.sendStatus(200);
     res.end();
-  }
-  if (entry.recapatcha == '') {
+  } else {
+    console.log('recapatcha was bad');
     res.sendStatus(403);
     res.end();
   }
-
-  delete entry['recapatcha'];
-  newInterest(entry);
-  res.sendStatus(200);
-  res.end();
 });
 
 app.listen(port, () => console.log(`Interestform API is up on port:${port}!`));

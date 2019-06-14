@@ -1,15 +1,6 @@
 import axios from 'axios';
 import { FormValues } from '../components/InterestForm';
 
-interface Response {
-  data: string;
-  status: number;
-  statusText: string;
-  headers: object;
-  request: object;
-  config: object;
-}
-
 export const submitHandler = (
   values: FormValues,
   callBack: (success: boolean) => void

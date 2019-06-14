@@ -1,12 +1,16 @@
-import { Field, Formik, FormikProps } from 'formik';
 import React from 'react';
-import * as Yup from 'yup';
-import './InterestForm.css';
+
 import info from '../utils/text.json';
-import keys from '../utils/keys.json';
-import { submitHandler } from '../utils/handler';
+import keys from '../server_secret.json';
+
 import { Section } from './Section';
+import './InterestForm.css';
+
+import { Field, Formik, FormikProps } from 'formik';
+import * as Yup from 'yup';
+
 import Recaptcha from 'react-recaptcha';
+import { submitHandler } from '../utils/handler';
 
 export interface FormValues {
   companyName: string;
@@ -20,13 +24,13 @@ export interface FormValues {
 }
 
 const initialValues: FormValues = {
-  companyName: '',
-  contactPerson: '',
-  contactEmail: '',
-  contactTlf: '',
-  day: '',
-  marathon: '',
-  message: '',
+  companyName: 'testname',
+  contactPerson: 'testperson',
+  contactEmail: 'test@mail.no',
+  contactTlf: '123456',
+  day: 'dag1',
+  marathon: 'ja',
+  message: 'test',
   recaptcha: ''
 };
 
