@@ -2,6 +2,10 @@
 
 > itDAGENE interest form
 
+<p align="center">
+<img src="https://i.imgur.com/G0DdAx4.png" width="100%" />
+</p>
+
 ### Development
 ```zsh
 # Install dependencies
