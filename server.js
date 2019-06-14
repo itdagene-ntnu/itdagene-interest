@@ -2,12 +2,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const colors = require('colors');
+
 // API security
 const helmet = require('helmet');
 
 // Handlers
 const interestHandler = require('./interestHandler');
 const recaptchaHandler = require('./recaptchaHandler');
+const checkConnection = require('./checkConnection');
 
 const app = express();
 const port = 8000;
@@ -23,6 +26,9 @@ app.use(function(req, res, next) {
   );
   next();
 });
+
+// Check the connection to the sheet
+checkConnection();
 
 // POST endpoint. Takes the json from the from as input
 app.post('/', async function(req, res) {
@@ -45,4 +51,7 @@ app.post('/', async function(req, res) {
   }
 });
 
-app.listen(port, () => console.log(`Interestform API is up on port:${port}!`));
+app.listen(port, () => {
+  console.log('SUCCESS'.bgGreen);
+  console.log(`Interestform API is up on port:${port}!`.green);
+});

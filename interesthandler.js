@@ -9,10 +9,8 @@ async function interestHandler(entryObject) {
   await promisify(doc.useServiceAccountAuth)(creds);
   const info = await promisify(doc.getInfo)();
   const sheet = info.worksheets[0];
-  console.log(`Access to sheet [${sheet.title}] was granted.`);
 
   // Add the new row
-  console.log(entryObject);
   const parsedRow = {
     dato: new Date().toLocaleString('no', { hour12: false }),
     bedriftsnavn: entryObject.companyName,
