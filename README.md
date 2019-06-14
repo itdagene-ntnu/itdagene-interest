@@ -11,6 +11,12 @@
 - `RECAPTCHA_SECRET`: The secret recatcha key used to verify a user response
 - `REACT_APP_RECAPTCHA_SITEKEY`: The site recatcha key consumed by the form component
 
+> For testing test keys can be used
+
+[reCAPTCHA Docs](https://developers.google.com/recaptcha/docs/faq)
+- RECAPTCHA_SECRET=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+- REACT_APP_RECAPTCHA_SITEKEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+
 ### Development
 ```zsh
 # Install dependencies
