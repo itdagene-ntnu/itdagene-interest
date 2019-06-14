@@ -1,13 +1,17 @@
+// Express
 const express = require('express');
 const bodyParser = require('body-parser');
+
+// API security
 const helmet = require('helmet');
+
+// Handlers
 const interestHandler = require('./interestHandler');
 const recaptchaHandler = require('./recaptchaHandler');
 
 const app = express();
 const port = 8000;
 
-// Secure the API
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,6 +24,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+// POST endpoint. Takes the json from the from as input
 app.post('/', async function(req, res) {
   const entry = req.body;
   console.log(req);
