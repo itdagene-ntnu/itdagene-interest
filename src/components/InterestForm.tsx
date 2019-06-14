@@ -1,7 +1,6 @@
 import React from 'react';
 
 import info from '../utils/text.json';
-import keys from '../server_secret.json';
 
 import { Section } from './Section';
 import './InterestForm.css';
@@ -76,7 +75,7 @@ class InterestForm extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
-    console.log(this.props);
+    const SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY;
     return (
       <Formik
         initialValues={initialValues}
@@ -308,7 +307,7 @@ class InterestForm extends React.Component<Props> {
 
               <div className="center">
                 <Recaptcha
-                  sitekey={keys.SITEKEY}
+                  sitekey={SITEKEY}
                   id="recaptcha"
                   render="explicit"
                   theme="light"

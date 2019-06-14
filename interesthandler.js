@@ -2,11 +2,10 @@ const GoogleSpreadsheet = require('google-spreadsheet');
 const { promisify } = require('util');
 
 const creds = require('./client_secret.json');
-const interestsheet = require('./sheet_info.json');
 
 async function interestHandler(entryObject) {
   // Access and get info from the document
-  const doc = new GoogleSpreadsheet(interestsheet.id);
+  const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
   await promisify(doc.useServiceAccountAuth)(creds);
   const info = await promisify(doc.getInfo)();
   const sheet = info.worksheets[0];

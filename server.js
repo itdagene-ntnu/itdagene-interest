@@ -27,7 +27,6 @@ app.use(function(req, res, next) {
 // POST endpoint. Takes the json from the from as input
 app.post('/', async function(req, res) {
   const entry = req.body;
-  console.log(req);
 
   // Denne skal sjekke recaptcha, og retunerer et svar
   response = await recaptchaHandler(entry.recaptcha);
