@@ -25,7 +25,7 @@ export interface FormValues {
 const initialValues: FormValues = {
   companyName: 'testname',
   contactPerson: 'testperson',
-  contactEmail: 'test@mail.no',
+  contactEmail: 'reservekonto100@gmail.com',
   contactTlf: '123456',
   day: 'dag1',
   marathon: 'ja',

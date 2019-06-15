@@ -15,6 +15,7 @@ const helmet = require('helmet');
 // Handlers
 const interestHandler = require('./interestHandler');
 const recaptchaHandler = require('./recaptchaHandler');
+const mailHander = require('./mailHandler');
 const checkConnection = require('./checkConnection');
 
 const app = express();
@@ -116,13 +117,12 @@ app.post('/', async function(req, res) {
   response = await recaptchaHandler(entry.recaptcha);
 
   if (response.data.success) {
-    console.log('recapatcha verified'.green);
     interestHandler(entry);
+    mailHander(entry);
 
     res.sendStatus(200);
     res.end();
   } else {
-    console.log('recapatcha not verified'.red);
     res.sendStatus(403);
     res.end();
   }
