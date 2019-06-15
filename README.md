@@ -3,7 +3,7 @@
 > Built with React, Express and Google APIs
 
 <p align="center">
-<img src="https://i.imgur.com/G0DdAx4.png" width="100%" />
+<img src="https://i.imgur.com/nTtW9kb.png" width="100%" />
 </p>
 
 ### Environment variables
@@ -11,11 +11,9 @@
 - `RECAPTCHA_SECRET`: The secret recatcha key used to verify a user response
 - `REACT_APP_RECAPTCHA_SITEKEY`: The site recatcha key consumed by the form component
 
-> For testing test keys can be used
-
-[reCAPTCHA Docs](https://developers.google.com/recaptcha/docs/faq)
-- RECAPTCHA_SECRET=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
-- REACT_APP_RECAPTCHA_SITEKEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+> Google test keys can be used, see [reCAPTCHA Docs](https://developers.google.com/recaptcha/docs/faq)
+- _RECAPTCHA_SECRET=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe_
+- _REACT_APP_RECAPTCHA_SITEKEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI_
 
 ### Development
 ```zsh

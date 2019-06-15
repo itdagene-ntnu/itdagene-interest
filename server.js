@@ -2,7 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// Logging
 const colors = require('colors');
+const morgan = require('morgan');
+const path = require('path');
+const rfs = require('rotating-file-stream');
+const uuidv1 = require('uuid/v1');
 
 // API security
 const helmet = require('helmet');
@@ -30,22 +35,94 @@ app.use(function(req, res, next) {
 // Check the connection to the sheet
 checkConnection();
 
+// Logg String for printing response body
+const bodyString = req => ` {
+  CompanyName: ${req.body.companyName}
+  ContactPerson: ${req.body.contactPerson}
+  ContactEmail: ${req.body.contactEmail}
+  ContactTlf: ${req.body.contactTlf}
+  Day: ${req.body.day}
+  Marathon: ${req.body.marathon}
+  Message: ${req.body.message}
+}`;
+
+// Logg-String for printing immediate request
+const tinyLoggString = `
+============:date[web]===========
+> Request
+ID:\t:id
+Addr\t::remote-addr
+User\t:remote-user
+Method\t:method
+`;
+
+// Logg-String for printing full response
+const loggString = `
+> Response
+ID:\t:id
+Date\t:date[web]
+Addr\t::remote-addr
+User\t:remote-user
+Method\t:method
+Url\t":url"
+Ref\t":referrer HTTP/:http-version"
+Status\t:status
+Time\t:response-time ms
+Body\t:body
+====================================================
+`;
+
+// Create a rotating write stream
+const accessLogStream = rfs('access.log', {
+  interval: '1d', // rotate daily
+  path: path.join(__dirname, 'log')
+});
+
+// Create custom body token
+morgan.token('body', function(req, res) {
+  return bodyString(req);
+});
+
+// Create custom id token
+function assignId(req, res, next) {
+  req.id = uuidv1();
+  next();
+}
+app.use(assignId);
+morgan.token('id', function getId(req) {
+  return req.id;
+});
+
+// First print short timestamp
+app.use(
+  morgan(tinyLoggString, {
+    immediate: true,
+    stream: accessLogStream
+  })
+);
+
+// Then print long response
+app.use(
+  morgan(loggString, {
+    stream: accessLogStream
+  })
+);
+
 // POST endpoint. Takes the json from the from as input
 app.post('/', async function(req, res) {
   const entry = req.body;
 
   // Denne skal sjekke recaptcha, og retunerer et svar
   response = await recaptchaHandler(entry.recaptcha);
-  console.log('RESPONSE', response);
 
   if (response.data.success) {
-    console.log('recapatcha was good');
+    console.log('recapatcha verified'.green);
     interestHandler(entry);
 
     res.sendStatus(200);
     res.end();
   } else {
-    console.log('recapatcha was bad');
+    console.log('recapatcha not verified'.red);
     res.sendStatus(403);
     res.end();
   }
