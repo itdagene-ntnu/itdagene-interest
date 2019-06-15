@@ -16,7 +16,7 @@ let transporter = nodemailer.createTransport({
 });
 
 async function mailHandler(interest) {
-  fs.readFile(path.resolve(__dirname, '../public/template.html'), function(
+  fs.readFile(path.resolve(__dirname, '../public/mailTemplate'), function(
     err,
     html
   ) {
