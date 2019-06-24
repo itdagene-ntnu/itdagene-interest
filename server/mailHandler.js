@@ -21,9 +21,9 @@ async function mailHandler(interest) {
     html
   ) {
     transporter.sendMail({
-      from: `"itDAGENE 2020 Interesse" <${process.env.EMAIL}>`,
+      from: `"itDAGENE ${process.env.REACT_APP_YEAR} Interesse" <${process.env.EMAIL}>`,
       to: `${interest.contactPerson} - ${interest.companyName} <${interest.contactEmail}>`,
-      subject: `itDAGENE 2020: ${interest.companyName}`,
+      subject: `itDAGENE ${process.env.REACT_APP_YEAR}: ${interest.companyName}`,
       text: 'Bekreftelse Interesse itDAGENE',
       html: html
     });

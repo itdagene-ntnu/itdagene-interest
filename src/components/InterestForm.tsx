@@ -23,13 +23,13 @@ export interface FormValues {
 }
 
 const initialValues: FormValues = {
-  companyName: 'testname',
-  contactPerson: 'testperson',
-  contactEmail: 'reservekonto100@gmail.com',
-  contactTlf: '123456',
-  day: 'dag1',
-  marathon: 'ja',
-  message: 'test',
+  companyName: '',
+  contactPerson: '',
+  contactEmail: '',
+  contactTlf: '',
+  day: '',
+  marathon: '',
+  message: '',
   recaptcha: ''
 };
 

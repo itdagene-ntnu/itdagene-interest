@@ -20,6 +20,7 @@ class App extends React.Component<{}, State> {
   }
   public render(): JSX.Element {
     this.state.submitted && console.log('works');
+    const YEAR = process.env.REACT_APP_YEAR;
     return (
       <div className="App">
         <header className="header">
@@ -32,7 +33,7 @@ class App extends React.Component<{}, State> {
         {this.state.submitted ? (
           <Submitted success={this.state.success} />
         ) : (
-          <Container title={`Interesseskjema ${new Date().getFullYear()}`}>
+          <Container title={`Interesseskjema ${YEAR}`}>
             <InterestForm handleSubmit={this.submitted.bind(this)} />
           </Container>
         )}
