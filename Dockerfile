@@ -1,32 +1,29 @@
 FROM node:11 as builder
 
-WORKDIR app/
+WORKDIR /app
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json /app
+COPY yarn.lock /app
 
 RUN yarn
 
-COPY . ./
-
-# ARG defaults
-ARG REACT_APP_YEAR=2020
-ARG REACT_APP_RECAPTCHA_SITEKEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
-
-ENV REACT_APP_YEAR=$REACT_APP_YEAR
-ENV REACT_APP_RECAPTCHA_SITEKE=$REACT_APP_RECAPTCHA_SITEKEY
+COPY . /app
 
 RUN yarn build
 
-FROM node:11
+
+FROM nginx:1.12-alpine
 MAINTAINER Peder Smith <smithpeder@gmail.com>
 
-WORKDIR app/
+COPY --from=builder /app/build /usr/share/nginx/html
 
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/yarn.lock .
-COPY --from=builder app/build app/
+# ARG defaults
+ARG REACT_APP_YEAR
+ARG REACT_APP_RECAPTCHA_SITEKEY
 
-RUN yarn --prod
+ENV REACT_APP_YEAR=$YEAR
+ENV REACT_APP_RECAPTCHA_SITEKE=$RECAPTCHA_SITEKEY
 
-ENTRYPOINT ["yarn", "start"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

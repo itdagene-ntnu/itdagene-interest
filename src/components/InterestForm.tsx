@@ -1,4 +1,5 @@
 import React from 'react';
+import dotenv from 'dotenv';
 
 import info from '../utils/text.json';
 
@@ -75,7 +76,9 @@ class InterestForm extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
+    dotenv.config();
     const SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY;
+    console.log(process.env);
     return (
       <Formik
         initialValues={initialValues}

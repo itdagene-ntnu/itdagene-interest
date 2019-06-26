@@ -3,6 +3,7 @@ import './App.css';
 import Container from './components/Container';
 import InterestForm from './components/InterestForm';
 import { Submitted } from './components/Submitted';
+import dotenv from 'dotenv';
 
 interface State {
   submitted: boolean;
@@ -19,6 +20,7 @@ class App extends React.Component<{}, State> {
     this.setState({ submitted: true, success: success });
   }
   public render(): JSX.Element {
+    dotenv.config();
     this.state.submitted && console.log('works');
     const YEAR = process.env.REACT_APP_YEAR;
     return (
