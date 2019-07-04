@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const Submitted = (props: Props): JSX.Element => {
-  console.log(props.success);
   return (
     <div className="center">
       {props.success ? (
