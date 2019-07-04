@@ -21,7 +21,6 @@ class App extends React.Component<{}, State> {
   }
   public render(): JSX.Element {
     dotenv.config();
-    this.state.submitted && console.log('works');
     const YEAR = process.env.REACT_APP_YEAR;
     return (
       <div className="App">
