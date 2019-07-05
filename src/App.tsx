@@ -5,22 +5,29 @@ import InterestForm from './components/InterestForm';
 import { Submitted } from './components/Submitted';
 import dotenv from 'dotenv';
 import Switch from 'react-switch';
+import { RequestStatus } from './utils/handler';
 
 interface State {
-  submitted: boolean;
-  success: boolean;
+  status: RequestStatus;
+  isSubmitting: boolean;
   english: boolean;
 }
 
 class App extends React.Component<{}, State> {
   public state = {
-    submitted: false,
-    success: false,
+    status: RequestStatus.pending,
+    isSubmitting: false,
     english: false
   };
 
-  public submitted(success: boolean): void {
-    this.setState({ submitted: true, success: success });
+  // Sets the status state, used to display the success or failure message
+  public setStatus(status: RequestStatus): void {
+    this.setState({ status: status });
+  }
+
+  // Sets the status state, used to display the success or failure message
+  public isSubmitting(): void {
+    this.setState({ isSubmitting: true });
   }
 
   public render(): JSX.Element {
@@ -36,8 +43,8 @@ class App extends React.Component<{}, State> {
             alt="logo"
           />
         </header>
-        {this.state.submitted ? (
-          <Submitted success={this.state.success} />
+        {this.state.isSubmitting ? (
+          <Submitted status={this.state.status} />
         ) : (
           <Container title={`${TITLE} ${YEAR}`}>
             <label className="english">
@@ -56,7 +63,10 @@ class App extends React.Component<{}, State> {
               />
             </label>
             <InterestForm
-              handleSubmit={this.submitted.bind(this)}
+              handleSubmit={{
+                setStatus: this.setStatus.bind(this),
+                isSubmitting: this.isSubmitting.bind(this)
+              }}
               english={this.state.english}
             />
           </Container>

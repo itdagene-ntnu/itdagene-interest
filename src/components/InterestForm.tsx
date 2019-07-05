@@ -10,7 +10,7 @@ import { Field, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import Recaptcha from 'react-recaptcha';
-import { submitHandler } from '../utils/handler';
+import { RequestStatus, submitHandler } from '../utils/handler';
 
 export interface FormValues {
   companyName: string;
@@ -65,7 +65,10 @@ const validationSchema = Yup.object().shape({
 });
 
 interface Props {
-  handleSubmit: (success: boolean) => void;
+  handleSubmit: {
+    setStatus: (status: RequestStatus) => void;
+    isSubmitting: () => void;
+  };
   english: boolean;
 }
 
@@ -85,16 +88,15 @@ class InterestForm extends React.Component<Props> {
     return (
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, { setSubmitting }): void => {
+        onSubmit={(values): void => {
           // Append English to the values object
-          // This does not come from the form but from the parant component
+          // This does not come from the form but from the parent component
           values = {
             ...values,
-            ...{ english: this.props.english ? 'Ja' : 'Nei' }
+            ...{ english: this.props.english ? 'JA' : '-' }
           };
-          console.log(values);
-          submitHandler(values, this.props.handleSubmit);
-          setSubmitting(false);
+          this.props.handleSubmit.isSubmitting();
+          submitHandler(values, this.props.handleSubmit.setStatus);
         }}
         validationSchema={validationSchema}
       >

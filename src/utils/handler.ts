@@ -2,12 +2,19 @@ import axios from 'axios';
 import { FormValues } from '../components/InterestForm';
 import dotenv from 'dotenv';
 
+export enum RequestStatus {
+  pending = 'PENDING',
+  success = 'SUCCESS',
+  failure = 'FAILURE'
+}
+
 export const submitHandler = (
   values: FormValues,
-  callBack: (success: boolean) => void
+  callBack: (status: RequestStatus) => void
 ): void => {
   dotenv.config();
   const API_LOCATION = process.env.REACT_APP_API_LOCATION;
+  callBack(RequestStatus.pending);
   axios({
     method: 'post',
     url: API_LOCATION,
@@ -15,10 +22,10 @@ export const submitHandler = (
   })
     .then(function(res): void {
       console.log(res);
-      callBack(true);
+      callBack(RequestStatus.success);
     })
     .catch(function(error): void {
       console.log(error);
-      callBack(false);
+      callBack(RequestStatus.failure);
     });
 };
