@@ -8,3 +8,14 @@
 .logo {
   width: 300px;
 }
+
+.english {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.english span {
+  margin: 5px;
+  font-style: italic;
+}

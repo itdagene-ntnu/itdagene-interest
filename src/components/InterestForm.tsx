@@ -1,7 +1,7 @@
 import React from 'react';
 import dotenv from 'dotenv';
 
-import info from '../utils/text.json';
+import textarray from '../utils/text.json';
 
 import { Section } from './Section';
 import './InterestForm.css';
@@ -21,6 +21,7 @@ export interface FormValues {
   marathon: string;
   message: string;
   recaptcha: string;
+  english: string;
 }
 
 const initialValues: FormValues = {
@@ -31,7 +32,8 @@ const initialValues: FormValues = {
   day: '',
   marathon: '',
   message: '',
-  recaptcha: ''
+  recaptcha: '',
+  english: '-'
 };
 
 const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
@@ -64,6 +66,7 @@ const validationSchema = Yup.object().shape({
 
 interface Props {
   handleSubmit: (success: boolean) => void;
+  english: boolean;
 }
 
 class InterestForm extends React.Component<Props> {
@@ -78,10 +81,18 @@ class InterestForm extends React.Component<Props> {
   public render(): JSX.Element {
     dotenv.config();
     const SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY;
+    const info = this.props.english ? textarray.english : textarray.norwegian;
     return (
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }): void => {
+          // Append English to the values object
+          // This does not come from the form but from the parant component
+          values = {
+            ...values,
+            ...{ english: this.props.english ? 'Ja' : 'Nei' }
+          };
+          console.log(values);
           submitHandler(values, this.props.handleSubmit);
           setSubmitting(false);
         }}
@@ -100,8 +111,8 @@ class InterestForm extends React.Component<Props> {
           } = props;
           return (
             <form onSubmit={handleSubmit}>
-              <Section header="Bedriften" text={info.company}>
-                <h3>Bedriftsnavn*</h3>
+              <Section header={info.companyHeader} text={info.companyText}>
+                <h3>{info.companyField}*</h3>
                 <Field
                   id="companyName"
                   type="text"
@@ -122,8 +133,8 @@ class InterestForm extends React.Component<Props> {
                 </>
               </Section>
 
-              <Section header="Kontaktpersonen" text={info.person}>
-                <h3>Navn*</h3>
+              <Section header={info.personHeader} text={info.personText}>
+                <h3>{info.personField1}*</h3>
                 <Field
                   id="contactPerson"
                   type="text"
@@ -143,7 +154,7 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>Epost*</h3>
+                <h3>{info.personField2}*</h3>
                 <Field
                   id="contactEmail"
                   type="email"
@@ -163,7 +174,7 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>Telefon*</h3>
+                <h3>{info.personField3}*</h3>
                 <Field
                   id="contactTlf"
                   type="text"
@@ -184,9 +195,9 @@ class InterestForm extends React.Component<Props> {
                 </>
               </Section>
 
-              <Section header="Ønsker" text={info.day}>
-                <h3>Ønsket dag*</h3>
-                <span className="infoText">{info.day}</span>
+              <Section header={info.wishesHeader} text={info.wishesText}>
+                <h3>{info.dayHeader}*</h3>
+                <span className="infoText">{info.dayText}</span>
                 <div
                   className={
                     errors.day && touched.day
@@ -234,8 +245,8 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>Ønsker dere å delta på sommerjobbmaraton*</h3>
-                <span className="infoText">{info.marathon}</span>
+                <h3>{info.marathonHeader}*</h3>
+                <span className="infoText">{info.marathonText}</span>
                 <div
                   className={
                     errors.marathon && touched.marathon
@@ -283,8 +294,8 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>Andre henvendelser</h3>
-                <span className="infoText">{info.other}</span>
+                <h3>{info.otherHeader}</h3>
+                <span className="infoText">{info.otherText}</span>
                 <>
                   <Field
                     id="message"
