@@ -21,7 +21,7 @@ export interface FormValues {
   marathon: string;
   message: string;
   recaptcha: string;
-  english: string;
+  english: boolean;
 }
 
 const initialValues: FormValues = {
@@ -33,7 +33,7 @@ const initialValues: FormValues = {
   marathon: '',
   message: '',
   recaptcha: '',
-  english: '-'
+  english: false
 };
 
 const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
@@ -93,7 +93,7 @@ class InterestForm extends React.Component<Props> {
           // This does not come from the form but from the parent component
           values = {
             ...values,
-            ...{ english: this.props.english ? 'JA' : '-' }
+            ...{ english: this.props.english }
           };
           this.props.handleSubmit.isSubmitting();
           submitHandler(values, this.props.handleSubmit.setStatus);
