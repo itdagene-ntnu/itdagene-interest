@@ -51,5 +51,5 @@ $ yarn dev
 ```
 
 <p align="center">
-<img src="https://i.imgur.com/2Da2V7M.png" width="50%" />
+<img src="https://i.imgur.com/KQL1yjc.gif" width="50%" />
 </p>
