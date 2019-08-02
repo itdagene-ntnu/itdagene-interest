@@ -52,9 +52,6 @@ $ yarn start
 - `SHEET_ID`: The sheet id for the google sheet the form will edit
 - `RECAPTCHA_SECRET`: The secret recatcha key used to verify a user response
 
-> Google test keys can be used, see [reCAPTCHA Docs](https://developers.google.com/recaptcha/docs/faq)
-- _RECAPTCHA_SECRET=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe_
-
 ```zsh
 # Start the nodemon server for development
 $ yarn dev
