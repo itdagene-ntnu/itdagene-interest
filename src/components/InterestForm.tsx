@@ -36,18 +36,6 @@ const initialValues: FormValues = {
   english: false
 };
 
-const initialValuesForTesting: FormValues = {
-  companyName: 'TestName AS',
-  contactPerson: 'Test Name',
-  contactEmail: 'admin@itdagene.no',
-  contactTlf: '213123213',
-  day: 'Day 1',
-  marathon: 'Yes',
-  message: 'Some Message',
-  recaptcha: '',
-  english: false
-};
-
 const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
 
 const validationSchema = Yup.object().shape({
