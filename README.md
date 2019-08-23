@@ -3,7 +3,7 @@
 > Built with React, Express and Google APIs
 
 <p align="center">
-<img src="https://i.imgur.com/4SxULiO.png" width="100%" />
+  <img src="https://i.imgur.com/4SxULiO.png" width="100%" />
 </p>
 
 ## Motivation
