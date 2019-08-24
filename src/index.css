@@ -57,11 +57,33 @@ a {
 }
 
 a:hover {
-  color: #97D9EF;
+  color: #97d9ef;
   transition: 0.2s;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+header {
+  padding: 50px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 300px;
+}
+
+.english {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.english span {
+  margin: 5px;
+  font-style: italic;
 }

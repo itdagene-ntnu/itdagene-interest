@@ -12,6 +12,8 @@ import * as Yup from 'yup';
 import Recaptcha from 'react-recaptcha';
 import { RequestStatus, submitHandler } from '../utils/handler';
 
+dotenv.config();
+
 export interface FormValues {
   companyName: string;
   contactPerson: string;
@@ -65,14 +67,13 @@ const validationSchema = Yup.object().shape({
 });
 
 interface Props {
-  handleSubmit: {
-    setStatus: (status: RequestStatus) => void;
-    isSubmitting: () => void;
-  };
+  setStatus: (status: RequestStatus) => void;
+  setSubmitting: () => void;
   english: boolean;
 }
 
 class InterestForm extends React.Component<Props> {
+  // Mount the recaptcha
   public componentDidMount(): void {
     const script = document.createElement('script');
     script.src = 'https://www.google.com/recaptcha/api.js';
@@ -82,7 +83,6 @@ class InterestForm extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
-    dotenv.config();
     const SITEKEY = process.env.REACT_APP_RECAPTCHA_SITEKEY;
     const info = this.props.english ? textarray.english : textarray.norwegian;
     return (
@@ -95,8 +95,8 @@ class InterestForm extends React.Component<Props> {
             ...values,
             ...{ english: this.props.english }
           };
-          this.props.handleSubmit.isSubmitting();
-          submitHandler(values, this.props.handleSubmit.setStatus);
+          this.props.setSubmitting();
+          submitHandler(values, this.props.setStatus);
         }}
         validationSchema={validationSchema}
       >
