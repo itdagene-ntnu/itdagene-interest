@@ -1,38 +1,84 @@
 {
- "norwegian": {
-    "companyHeader": "Bedriften",
-    "companyText": "Navnet på bedriften du representerer.",
-    "companyField": "Bedriftsnavn",
-    "personHeader": "Kontaktpersonen",
-    "personText": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
-    "personField1": "Navn",
-    "personField2": "Epost",
-    "personField3": "Telefon",
-    "wishesHeader": "Ønsker",
-    "wishesText": "Vi ønsker å vite litt om hva din bedrift ønsker.",
-    "dayHeader": "Ønsker dag",
-    "dayText": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager...",
-    "marathonHeader": "Ønsker dere å delta på sommerjobbmaraton",
-    "marathonText": "Sommerjobbmaraton er...",
-    "otherHeader": "Andre henvendelser",
-    "otherText": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her."
+  "norwegian": {
+    "company": {
+      "header": "Bedriften",
+      "text": "Navnet på bedriften du representerer.",
+      "field": "Bedriftsnavn",
+      "placeholder": "Staten AS"
+    },
+    "person": {
+      "header": "Kontaktpersonen",
+      "text": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
+      "field1": "Navn",
+      "placeholder1": "Ola Nordman",
+      "field2": "Epost",
+      "placeholder2": "ola@nordman.no",
+      "field3": "Telefon",
+      "placeholder3": "90 00 00 00"
+    },
+    "wishes": {
+      "header": "Ønsker",
+      "text": "Vi ønsker å vite litt om hva din bedrift ønsker.",
+      "day": {
+        "header": "Ønsker dag",
+        "text": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager...",
+        "field1": "Mandag 9.september",
+        "field2": "Tirsdag 10.september",
+        "field3": "Ingen prioritering"
+      },
+      "marathon": {
+        "header": "Ønsker dere å delta på sommerjobbmaraton",
+        "text": "Sommerjobbmaraton er...",
+        "field1": "Ja",
+        "field2": "Nei",
+        "field3": "Vet ikke"
+      },
+      "other": {
+        "header": "Andre henvendelser",
+        "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
+        "placeholder": "Frivillig felt..."
+      }
+    }
   },
-  "english":{
-    "companyHeader": "The Company",
-    "companyText": "The name of the company you represent",
-    "companyField": "Company name",
-    "personHeader": "Contact person",
-    "personText": "Name, email, and phone number to the contact person, so we can get in touch",
-    "personField1": "Name",
-    "personField2": "Email",
-    "personField3": "Phone number",
-    "wishesHeader": "Wishes",
-    "wishesText": "We want to get to know some of your wishes.",
-    "dayHeader": "Preferred day",
-    "dayText": "The standperiod will be between 10:00 and 16:00 both days...",
-    "marathonHeader": "Intership-marathon",
-    "marathonText": "Intership-marathon is...",
-    "otherHeader": "Other inquiries",
-    "otherText": "Something special that you want to inform us about? This field is voluntarily and we do not expect anything special here."
+  "english": {
+    "company": {
+      "header": "The Company",
+      "text": "Name of the company you represent",
+      "field": "Companyname",
+      "placeholder": "Staten AS"
+    },
+    "person": {
+      "header": "Kontaktpersonen",
+      "text": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
+      "field1": "Navn",
+      "placeholder1": "Ola Nordman",
+      "field2": "Epost",
+      "placeholder2": "ola@nordman.no",
+      "field3": "Telefon",
+      "placeholder3": "90 00 00 00"
+    },
+    "wishes": {
+      "header": "Ønsker",
+      "text": "Vi ønsker å vite litt om hva din bedrift ønsker.",
+      "day": {
+        "header": "Ønsker dag",
+        "text": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager...",
+        "field1": "Mandag 9.september",
+        "field2": "Tirsdag 10.september",
+        "field3": "Ingen prioritering"
+      },
+      "marathon": {
+        "header": "Ønsker dere å delta på sommerjobbmaraton",
+        "text": "Sommerjobbmaraton er...",
+        "field1": "Ja",
+        "field2": "Nei",
+        "field3": "Vet ikke"
+      },
+      "other": {
+        "header": "Andre henvendelser",
+        "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
+        "placeholder": "Other wishes..."
+      }
+    }
   }
 }

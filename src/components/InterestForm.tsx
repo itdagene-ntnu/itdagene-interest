@@ -113,13 +113,14 @@ class InterestForm extends React.Component<Props> {
           } = props;
           return (
             <form onSubmit={handleSubmit}>
-              <Section header={info.companyHeader} text={info.companyText}>
-                <h3>{info.companyField}*</h3>
+              <Section header={info.company.header} text={info.company.text}>
+                <h3>{info.company.field}*</h3>
                 <Field
                   id="companyName"
                   type="text"
                   value={values.companyName}
                   name="companyName"
+                  placeholder={info.company.placeholder}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
@@ -135,13 +136,14 @@ class InterestForm extends React.Component<Props> {
                 </>
               </Section>
 
-              <Section header={info.personHeader} text={info.personText}>
-                <h3>{info.personField1}*</h3>
+              <Section header={info.person.header} text={info.person.text}>
+                <h3>{info.person.field1}*</h3>
                 <Field
                   id="contactPerson"
                   type="text"
                   value={values.contactPerson}
                   name="contactPerson"
+                  placeholder={info.person.placeholder1}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
@@ -156,12 +158,13 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>{info.personField2}*</h3>
+                <h3>{info.person.field2}*</h3>
                 <Field
                   id="contactEmail"
                   type="email"
                   value={values.contactEmail}
                   name="contactEmail"
+                  placeholder={info.person.placeholder2}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
@@ -176,12 +179,13 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>{info.personField3}*</h3>
+                <h3>{info.person.field3}*</h3>
                 <Field
                   id="contactTlf"
                   type="text"
                   value={values.contactTlf}
                   name="contactTlf"
+                  placeholder={info.person.placeholder3}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
@@ -197,9 +201,9 @@ class InterestForm extends React.Component<Props> {
                 </>
               </Section>
 
-              <Section header={info.wishesHeader} text={info.wishesText}>
-                <h3>{info.dayHeader}*</h3>
-                <span className="infoText">{info.dayText}</span>
+              <Section header={info.wishes.header} text={info.wishes.text}>
+                <h3>{info.wishes.day.header}*</h3>
+                <span className="infoText">{info.wishes.day.text}</span>
                 <div
                   className={
                     errors.day && touched.day
@@ -216,7 +220,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Mandag 9.september
+                    {info.wishes.day.field1}
                   </label>
                   <label>
                     <Field
@@ -227,7 +231,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Tirsdag 10.september
+                    {info.wishes.day.field2}
                   </label>
                   <label>
                     <Field
@@ -238,7 +242,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Ingen prioritering
+                    {info.wishes.day.field3}
                   </label>
                 </div>
                 <>
@@ -247,8 +251,8 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>{info.marathonHeader}*</h3>
-                <span className="infoText">{info.marathonText}</span>
+                <h3>{info.wishes.marathon.header}*</h3>
+                <span className="infoText">{info.wishes.marathon.text}</span>
                 <div
                   className={
                     errors.marathon && touched.marathon
@@ -265,7 +269,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Ja
+                    {info.wishes.marathon.field1}
                   </label>
                   <label className="label">
                     <Field
@@ -276,7 +280,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Nei
+                    {info.wishes.marathon.field2}
                   </label>
                   <label className="label">
                     <Field
@@ -287,7 +291,7 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    Vet ikke enda
+                    {info.wishes.marathon.field3}
                   </label>
                 </div>
                 <>
@@ -296,8 +300,8 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
 
-                <h3>{info.otherHeader}</h3>
-                <span className="infoText">{info.otherText}</span>
+                <h3>{info.wishes.other.header}</h3>
+                <span className="infoText">{info.wishes.other.text}</span>
                 <>
                   <Field
                     id="message"
@@ -306,7 +310,7 @@ class InterestForm extends React.Component<Props> {
                     name="message"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Frivillig felt..."
+                    placeholder={info.wishes.other.placeholder}
                     className={
                       errors.message && touched.message
                         ? 'textarea error'
