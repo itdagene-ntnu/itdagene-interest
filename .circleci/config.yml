@@ -42,6 +42,8 @@ workflows:
     jobs:
       - tests
       - build-docker:
+          requires:
+            - tests
           filters:
             branches:
               only:
