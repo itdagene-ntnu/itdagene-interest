@@ -11,7 +11,6 @@ import * as Yup from 'yup';
 
 import Recaptcha from 'react-recaptcha';
 import { RequestStatus, submitHandler } from '../utils/handler';
-
 dotenv.config();
 
 export interface FormValues {
