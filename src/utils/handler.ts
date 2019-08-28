@@ -21,11 +21,9 @@ export const submitHandler = (
     data: { ...values }
   })
     .then(function(res): void {
-      console.log(res);
       callBack(RequestStatus.success);
     })
     .catch(function(error): void {
-      console.log(error);
       callBack(RequestStatus.failure);
     });
 };

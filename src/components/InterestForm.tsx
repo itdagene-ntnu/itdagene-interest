@@ -22,6 +22,7 @@ export interface FormValues {
   marathon: string;
   message: string;
   recaptcha: string;
+  confirm: boolean;
   english: boolean;
 }
 
@@ -34,6 +35,7 @@ const initialValues: FormValues = {
   marathon: '',
   message: '',
   recaptcha: '',
+  confirm: false,
   english: false
 };
 
@@ -41,28 +43,28 @@ const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
 
 const validationSchema = Yup.object().shape({
   companyName: Yup.string()
-    .required('Bedriftsnavn er påkrevd')
-    .matches(regex, 'Ugyldig karakterer'),
+    .required('Username is required')
+    .matches(regex, 'Illegal characters'),
   contactPerson: Yup.string()
-    .required('Kontaktpersonen er påkrevd')
-    .matches(regex, 'Ugyldig karakterer'),
+    .required('Contact person is required')
+    .matches(regex, 'Illegal characters'),
   contactEmail: Yup.string()
-    .required('Epost er påkrevd')
-    .email('Epost må være på lovlig format'),
+    .required('Email is required')
+    .email('Email must be on a vaid format'),
   contactTlf: Yup.string()
-    .required('Telefonnummer er påkrevd')
+    .required('Phone number is required')
     .matches(
       /^([+,-, ,0-9,(,)]){4,15}/,
-      'Telefonnummer må være på lovlig format'
+      'Phone number must be on a valid format'
     ),
-  day: Yup.string()
-    .required('Påkrevd felt')
-    .matches(regex, 'Ugyldig karakterer'),
-  marathon: Yup.string()
-    .required('Påkrevd felt')
-    .matches(regex, 'Ugyldig karakterer'),
-  message: Yup.string().max(300, 'Max 300 bokstaver'),
-  recaptcha: Yup.string().required('Vennligst bekreft vår recaptcha')
+  day: Yup.string().required('Required field'),
+  marathon: Yup.string().required('Required field'),
+  message: Yup.string().max(300, 'Max 300 letters'),
+  recaptcha: Yup.string().required('Please do our recaptcha!'),
+  confirm: Yup.bool().oneOf(
+    [true],
+    'Please accept our requierments for submitting'
+  )
 });
 
 interface Props {
@@ -88,12 +90,11 @@ class InterestForm extends React.Component<Props> {
       <Formik
         initialValues={initialValues}
         onSubmit={(values): void => {
-          // Append English to the values object
-          // This does not come from the form but from the parent component
-          values = {
-            ...values,
-            ...{ english: this.props.english }
-          };
+          // Append English as a key value pair
+          values.english = this.props.english;
+          // Remove the confirm key/value pair
+          delete values.confirm;
+
           this.props.setSubmitting();
           submitHandler(values, this.props.setStatus);
         }}
@@ -110,6 +111,8 @@ class InterestForm extends React.Component<Props> {
             handleSubmit,
             setFieldValue
           } = props;
+          console.log(values);
+          console.log(validationSchema);
           return (
             <form onSubmit={handleSubmit}>
               <Section header={info.company.header} text={info.company.text}>
@@ -322,6 +325,30 @@ class InterestForm extends React.Component<Props> {
                   )}
                 </>
               </Section>
+
+              <div className="center">
+                <label className="label">
+                  <Field
+                    id="confirm"
+                    value={values.confirm}
+                    type="checkbox"
+                    name="confirm"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.confirm && touched.confirm
+                        ? 'textarea error'
+                        : 'textarea'
+                    }
+                  />
+                  {info.confirm}
+                  Vi forstår at dette IKKE er et påmeldingskjema, men en
+                  mulighet til å melde interesse.
+                  {touched.confirm && errors.confirm && (
+                    <div className="input-feedback">{errors.confirm}</div>
+                  )}
+                </label>
+              </div>
 
               <div className="center">
                 <Recaptcha

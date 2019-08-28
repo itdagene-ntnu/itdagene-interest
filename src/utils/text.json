@@ -38,7 +38,8 @@
         "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
         "placeholder": "Frivillig felt..."
       }
-    }
+    },
+    "confirm": "Vi forstår at dette IKKE er et påmeldingskjema, men en mulighet til å melde interesse."
   },
   "english": {
     "company": {
@@ -79,6 +80,7 @@
         "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
         "placeholder": "Other wishes..."
       }
-    }
+    },
+    "confirm": "Vi forstår at dette IKKE er et påmeldingskjema, men en mulighet til å melde interesse."
   }
 }
