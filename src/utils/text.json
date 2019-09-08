@@ -62,14 +62,14 @@
       "header": "Wishes",
       "text": "By choosing one of the selections you're not excluding yourself from the others.",
       "day": {
-        "header": "Wishes day",
+        "header": "Day",
         "text": "The stands will be open from 10AM to 4PM both days",
         "field1": "Day 1",
         "field2": "Day 2",
         "field3": "No prioritization"
       },
       "marathon": {
-        "header": "Ønsker dere å delta på sommerjobbmaraton",
+        "header": "Summer internship marathon",
         "text": "Do you wish to attend the summer internship marathon? This is a speed presentation where you present your summer internship for the upcoming year.",
         "field1": "Yes",
         "field2": "No",
