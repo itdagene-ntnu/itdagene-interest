@@ -10,9 +10,9 @@
       "header": "Kontaktpersonen",
       "text": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
       "field1": "Navn",
-      "placeholder1": "Ola Nordman",
-      "field2": "Epost",
-      "placeholder2": "ola@nordman.no",
+      "placeholder1": "Ola Nordmann",
+      "field2": "E-post",
+      "placeholder2": "ola@nordmann.no",
       "field3": "Telefon",
       "placeholder3": "90 00 00 00"
     },
@@ -28,7 +28,7 @@
       },
       "marathon": {
         "header": "Ønsker dere å delta på sommerjobbmaraton",
-        "text": "Ønsker dere å presentere under sommerjobbmaraton. Dette er en hurtigpresentasjon hvor du presenterer deres sommerjobb for det følgende semesteret.",
+        "text": "Ønsker dere å presentere under sommerjobbmaraton? Dette er en hurtigpresentasjon hvor du presenterer deres sommerjobb for neste år.",
         "field1": "Ja",
         "field2": "Nei",
         "field3": "Vet ikke"
@@ -45,7 +45,7 @@
     "company": {
       "header": "The Company",
       "text": "Name of the company you represent",
-      "field": "Companyname",
+      "field": "Company",
       "placeholder": "Company AS"
     },
     "person": {
@@ -53,14 +53,14 @@
       "text": "Name, email and phone number for the contact person, so we can contact you.",
       "field1": "Name",
       "placeholder1": "John Doe",
-      "field2": "Email",
+      "field2": "E-mail",
       "placeholder2": "john@doe.com",
       "field3": "Phone",
       "placeholder3": "90 00 00 00"
     },
     "wishes": {
       "header": "Wishes",
-      "text": "By chosing one of the selections you're not excluding yourself from the others.",
+      "text": "By choosing one of the selections you're not excluding yourself from the others.",
       "day": {
         "header": "Wishes day",
         "text": "The stands will be open from 10AM to 4PM both days",
@@ -70,14 +70,14 @@
       },
       "marathon": {
         "header": "Ønsker dere å delta på sommerjobbmaraton",
-        "text": "Do you wish to attend the summerjobmarathon? This is a speed presentation where you present your sommerjob for the upcoming year.",
+        "text": "Do you wish to attend the summer internship marathon? This is a speed presentation where you present your summer internship for the upcoming year.",
         "field1": "Yes",
         "field2": "No",
         "field3": "Have not decided"
       },
       "other": {
         "header": "Other requests",
-        "text": "Something special you want to inform us about. This field is not required.",
+        "text": "Something special you want to inform us about? This field is not required.",
         "placeholder": "Other wishes..."
       }
     },
