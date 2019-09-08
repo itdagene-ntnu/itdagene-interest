@@ -342,8 +342,6 @@ class InterestForm extends React.Component<Props> {
                     }
                   />
                   {info.confirm}
-                  Vi forstår at dette IKKE er et påmeldingskjema, men en
-                  mulighet til å melde interesse.
                   {touched.confirm && errors.confirm && (
                     <div className="input-feedback">{errors.confirm}</div>
                   )}

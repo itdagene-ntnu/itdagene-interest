@@ -18,17 +18,17 @@
     },
     "wishes": {
       "header": "Ønsker",
-      "text": "Vi ønsker å vite litt om hva din bedrift ønsker.",
+      "text": "Ved å velge noe under ekskluderer du deg ikke fra noen av de andre valgene.",
       "day": {
-        "header": "Ønsker dag",
-        "text": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager...",
-        "field1": "Mandag 9.september",
-        "field2": "Tirsdag 10.september",
+        "header": "Ønsket dag",
+        "text": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager.",
+        "field1": "Dag 1",
+        "field2": "Dag 2",
         "field3": "Ingen prioritering"
       },
       "marathon": {
         "header": "Ønsker dere å delta på sommerjobbmaraton",
-        "text": "Sommerjobbmaraton er...",
+        "text": "Ønsker dere å presentere under sommerjobbmaraton. Dette er en hurtigpresentasjon hvor du presenterer deres sommerjobb for det følgende semesteret.",
         "field1": "Ja",
         "field2": "Nei",
         "field3": "Vet ikke"
@@ -46,41 +46,41 @@
       "header": "The Company",
       "text": "Name of the company you represent",
       "field": "Companyname",
-      "placeholder": "Staten AS"
+      "placeholder": "Company AS"
     },
     "person": {
-      "header": "Kontaktpersonen",
-      "text": "Navn, epost og telefonnummer til kontaktpersonen, så vi kan ta kontakt.",
-      "field1": "Navn",
-      "placeholder1": "Ola Nordman",
-      "field2": "Epost",
-      "placeholder2": "ola@nordman.no",
-      "field3": "Telefon",
+      "header": "Contact Person",
+      "text": "Name, email and phone number for the contact person, so we can contact you.",
+      "field1": "Name",
+      "placeholder1": "John Doe",
+      "field2": "Email",
+      "placeholder2": "john@doe.com",
+      "field3": "Phone",
       "placeholder3": "90 00 00 00"
     },
     "wishes": {
-      "header": "Ønsker",
-      "text": "Vi ønsker å vite litt om hva din bedrift ønsker.",
+      "header": "Wishes",
+      "text": "By chosing one of the selections you're not excluding yourself from the others.",
       "day": {
-        "header": "Ønsker dag",
-        "text": "Standperioden vil vare fra kl. 10:00 til kl. 16:00 begge dager...",
-        "field1": "Mandag 9.september",
-        "field2": "Tirsdag 10.september",
-        "field3": "Ingen prioritering"
+        "header": "Wishes day",
+        "text": "The stands will be open from 10AM to 4PM both days",
+        "field1": "Day 1",
+        "field2": "Day 2",
+        "field3": "No prioritization"
       },
       "marathon": {
         "header": "Ønsker dere å delta på sommerjobbmaraton",
-        "text": "Sommerjobbmaraton er...",
-        "field1": "Ja",
-        "field2": "Nei",
-        "field3": "Vet ikke"
+        "text": "Do you wish to attend the summerjobmarathon? This is a speed presentation where you present your sommerjob for the upcoming year.",
+        "field1": "Yes",
+        "field2": "No",
+        "field3": "Have not decided"
       },
       "other": {
-        "header": "Andre henvendelser",
-        "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
+        "header": "Other requests",
+        "text": "Something special you want to inform us about. This field is not required.",
         "placeholder": "Other wishes..."
       }
     },
-    "confirm": "Vi forstår at dette IKKE er et påmeldingskjema, men en mulighet til å melde interesse."
+    "confirm": "We understand that this is NOT a sign-up for itDAGENE, but an opportunity to show interest."
   }
 }
