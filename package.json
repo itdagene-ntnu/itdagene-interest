@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://interesse.itdagene.no",
   "dependencies": {
-    "@types/dotenv": "^6.1.1",
+    "@types/dotenv": "^8.2.0",
     "@types/node": "^12.7.2",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.0",
