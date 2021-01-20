@@ -309,7 +309,7 @@ class InterestForm extends React.Component<Props> {
                 <span className="infoText">{info.wishes.digital.text}</span>
                 <div
                   className={
-                    errors.marathon && touched.marathon
+                    errors.digital && touched.digital
                       ? 'divNoError divError'
                       : 'divNoError'
                   }
@@ -323,34 +323,34 @@ class InterestForm extends React.Component<Props> {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {info.wishes.marathon.field1}
+                    {info.wishes.digital.field1}
                   </label>
                   <label className="label">
                     <Field
-                      id="marathon"
+                      id="digital"
                       value="Nei"
                       type="radio"
                       name="digital"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {info.wishes.marathon.field2}
+                    {info.wishes.digital.field2}
                   </label>
                   <label className="label">
                     <Field
-                      id="marathon"
-                      value="Vet ikke enda"
+                      id="digital"
+                      value="Vet ikke"
                       type="radio"
                       name="digital"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {info.wishes.marathon.field3}
+                    {info.wishes.digital.field3}
                   </label>
                 </div>
                 <>
-                  {touched.marathon && errors.marathon && (
-                    <div className="input-feedback">{errors.marathon}</div>
+                  {touched.digital && errors.digital && (
+                    <div className="input-feedback">{errors.digital}</div>
                   )}
                 </>
 
