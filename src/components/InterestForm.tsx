@@ -19,6 +19,7 @@ export interface FormValues {
   contactEmail: string;
   contactTlf: string;
   day: string;
+  digital: string;
   marathon: string;
   message: string;
   recaptcha: string;
@@ -33,6 +34,7 @@ const initialValues: FormValues = {
   contactTlf: '',
   day: '',
   marathon: '',
+  digital: '',
   message: '',
   recaptcha: '',
   confirm: false,
@@ -58,6 +60,7 @@ const validationSchema = Yup.object().shape({
       'Phone number must be on a valid format'
     ),
   day: Yup.string().required('Required field'),
+  digital: Yup.string().required('Required field'),
   marathon: Yup.string().required('Required field'),
   message: Yup.string().max(300, 'Max 300 letters'),
   recaptcha: Yup.string().required('Please do our recaptcha!'),
@@ -290,6 +293,55 @@ class InterestForm extends React.Component<Props> {
                       value="Vet ikke enda"
                       type="radio"
                       name="marathon"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {info.wishes.marathon.field3}
+                  </label>
+                </div>
+                <>
+                  {touched.marathon && errors.marathon && (
+                    <div className="input-feedback">{errors.marathon}</div>
+                  )}
+                </>
+
+                <h3>{info.wishes.digital.header}*</h3>
+                <span className="infoText">{info.wishes.digital.text}</span>
+                <div
+                  className={
+                    errors.marathon && touched.marathon
+                      ? 'divNoError divError'
+                      : 'divNoError'
+                  }
+                >
+                  <label className="label">
+                    <Field
+                      id="digital"
+                      value="Ja"
+                      type="radio"
+                      name="digital"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {info.wishes.marathon.field1}
+                  </label>
+                  <label className="label">
+                    <Field
+                      id="marathon"
+                      value="Nei"
+                      type="radio"
+                      name="digital"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {info.wishes.marathon.field2}
+                  </label>
+                  <label className="label">
+                    <Field
+                      id="marathon"
+                      value="Vet ikke enda"
+                      type="radio"
+                      name="digital"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
