@@ -84,10 +84,10 @@
       },
       "digital": {
         "header": "Digital event",
-        "text": "Do you wish to attend if itDAGENE 2021 is held digitally? We are currently planning and hoping we can host the event with attendance.",
+        "text": "Do you wish to attend if itDAGENE 2021 is held digitally? We are currently planning and hoping we can host the event with physical attendance.",
         "field1": "Yes",
         "field2": "No",
-        "field3": "Have not decided"
+        "field3": "Not sure"
       },
       "other": {
         "header": "Other requests",
