@@ -1,4 +1,4 @@
-FROM node:11 as builder
+FROM node:16 as builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN yarn build
 
 FROM nginx:1.17-alpine
 
-MAINTAINER Peder Smith <smithpeder@gmail.com>
+LABEL org.opencontianers.image.authors="web@itdagene.no"
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
