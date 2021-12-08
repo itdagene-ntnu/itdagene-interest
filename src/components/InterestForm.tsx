@@ -38,7 +38,7 @@ const initialValues: FormValues = {
   message: '',
   recaptcha: '',
   confirm: false,
-  english: false
+  english: false,
 };
 
 const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
@@ -67,7 +67,7 @@ const validationSchema = Yup.object().shape({
   confirm: Yup.bool().oneOf(
     [true],
     'Please accept our requierments for submitting'
-  )
+  ),
 });
 
 interface Props {
@@ -112,7 +112,7 @@ class InterestForm extends React.Component<Props> {
             handleChange,
             handleBlur,
             handleSubmit,
-            setFieldValue
+            setFieldValue,
           } = props;
           console.log(values);
           console.log(validationSchema);
