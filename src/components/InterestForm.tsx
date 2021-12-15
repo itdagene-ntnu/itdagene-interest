@@ -41,7 +41,7 @@ const initialValues: FormValues = {
   english: false,
 };
 
-const regex = /^([A-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
+const regex = /^([ÆØÅæøåA-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
 
 const validationSchema = Yup.object().shape({
   companyName: Yup.string()
