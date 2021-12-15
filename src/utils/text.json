@@ -34,8 +34,8 @@
         "field3": "Vet ikke"
       },
       "digital": {
-        "header": "Ønsker dere å delta dersom itDAGENE 2021 gjennomføres heldigitalt?",
-        "text": "Ønsker dere å delta dersom itDAGENE 2021 gjennomføres heldigitalt? Vi planlegger og håper vi kan gjennomføre itDAGENE med fysisk oppmøte.",
+        "header": "Ønsker dere å delta dersom itDAGENE 2022 gjennomføres heldigitalt?",
+        "text": "Ønsker dere å delta dersom itDAGENE 2022 gjennomføres heldigitalt? Vi planlegger og håper vi kan gjennomføre itDAGENE med fysisk oppmøte.",
         "field1": "Ja",
         "field2": "Nei",
         "field3": "Vet ikke"
@@ -51,7 +51,7 @@
   "english": {
     "company": {
       "header": "The Company",
-      "text": "Name of the company you represent",
+      "text": "Name of the company you represent.",
       "field": "Company",
       "placeholder": "Company AS"
     },
@@ -70,7 +70,7 @@
       "text": "By choosing one of the selections you're not excluding yourself from the others.",
       "day": {
         "header": "Day",
-        "text": "The stands will be open from 10AM to 4PM both days",
+        "text": "The stands will be open from 10AM to 4PM both days.",
         "field1": "Day 1",
         "field2": "Day 2",
         "field3": "No prioritization"
@@ -84,7 +84,7 @@
       },
       "digital": {
         "header": "Digital event",
-        "text": "Do you wish to attend if itDAGENE 2021 is held digitally? We are currently planning and hoping we can host the event with physical attendance.",
+        "text": "Do you wish to attend if itDAGENE 2022 is held digitally? We are currently planning and hoping we can host the event with physical attendance.",
         "field1": "Yes",
         "field2": "No",
         "field3": "Not sure"
