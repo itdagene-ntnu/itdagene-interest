@@ -1396,10 +1396,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-recaptcha@^2.3.3":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@types/react-recaptcha/-/react-recaptcha-2.3.3.tgz#700369afa4d32e6e1fa08166fe73a717931fe8e0"
-  integrity sha512-1IdhJxBbPN+QL/eARSl/qwV2+03kwewJmZ43CWJJoGVZd4S4wGiascCl1HVe8PRtNPzXDqAi+nXIufvEDIsAPg==
+"@types/react-recaptcha@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/react-recaptcha/-/react-recaptcha-2.3.4.tgz#7c7e89e37c26a9d3b6e2c2e26fe84a3a308f7edd"
+  integrity sha512-RLnUgfFeQwg22+Mp+IvFlXz25+JrcwyxeYe9oAjbvCsIxK5tGrXWb44bK3VusdWCWIiufbMtEG8i4PFXSCBUNA==
   dependencies:
     "@types/react" "*"
 
