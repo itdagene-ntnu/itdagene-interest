@@ -9169,12 +9169,12 @@ react-scripts@^3.1.1:
   optionalDependencies:
     fsevents "2.0.7"
 
-react-switch@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-5.0.1.tgz#449277f4c3aed5286fffd0f50d5cbc2a23330406"
-  integrity sha512-Pa5kvqRfX85QUCK1Jv0rxyeElbC3aNpCP5hV0LoJpU/Y6kydf0t4kRriQ6ZYA4kxWwAYk/cH51T4/sPzV9mCgQ==
+react-switch@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-6.1.0.tgz#46239535820f6cf1331aecd948ba585d8a7b532a"
+  integrity sha512-cOwQkxtHCOGtoK0KN3kZBPTQjt8P1TTpaor+TS0AJRLfFBIRkgjVIUCwAfvVlW32Bi1BK333rk9y/14suD38SA==
   dependencies:
-    prop-types "^15.6.2"
+    prop-types "^15.7.2"
 
 react@^16.14.0:
   version "16.14.0"
