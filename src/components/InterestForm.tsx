@@ -19,7 +19,6 @@ export interface FormValues {
   contactEmail: string;
   contactTlf: string;
   day: string;
-  digital: string;
   marathon: string;
   message: string;
   recaptcha: string;
@@ -34,7 +33,6 @@ const initialValues: FormValues = {
   contactTlf: '',
   day: '',
   marathon: '',
-  digital: '',
   message: '',
   recaptcha: '',
   confirm: false,
@@ -60,7 +58,6 @@ const validationSchema = Yup.object().shape({
       'Phone number must be on a valid format'
     ),
   day: Yup.string().required('Required field'),
-  digital: Yup.string().required('Required field'),
   marathon: Yup.string().required('Required field'),
   message: Yup.string().max(300, 'Max 300 letters'),
   recaptcha: Yup.string().required('Please do our recaptcha!'),
@@ -302,55 +299,6 @@ class InterestForm extends React.Component<Props> {
                 <>
                   {touched.marathon && errors.marathon && (
                     <div className="input-feedback">{errors.marathon}</div>
-                  )}
-                </>
-
-                <h3>{info.wishes.digital.header}*</h3>
-                <span className="infoText">{info.wishes.digital.text}</span>
-                <div
-                  className={
-                    errors.digital && touched.digital
-                      ? 'divNoError divError'
-                      : 'divNoError'
-                  }
-                >
-                  <label className="label">
-                    <Field
-                      id="digital"
-                      value="Ja"
-                      type="radio"
-                      name="digital"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {info.wishes.digital.field1}
-                  </label>
-                  <label className="label">
-                    <Field
-                      id="digital"
-                      value="Nei"
-                      type="radio"
-                      name="digital"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {info.wishes.digital.field2}
-                  </label>
-                  <label className="label">
-                    <Field
-                      id="digital"
-                      value="Vet ikke"
-                      type="radio"
-                      name="digital"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {info.wishes.digital.field3}
-                  </label>
-                </div>
-                <>
-                  {touched.digital && errors.digital && (
-                    <div className="input-feedback">{errors.digital}</div>
                   )}
                 </>
 

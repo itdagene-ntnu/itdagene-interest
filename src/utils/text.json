@@ -33,13 +33,6 @@
         "field2": "Nei",
         "field3": "Vet ikke"
       },
-      "digital": {
-        "header": "Ønsker dere å delta dersom itDAGENE 2022 gjennomføres heldigitalt?",
-        "text": "Ønsker dere å delta dersom itDAGENE 2022 gjennomføres heldigitalt? Vi planlegger og håper vi kan gjennomføre itDAGENE med fysisk oppmøte.",
-        "field1": "Ja",
-        "field2": "Nei",
-        "field3": "Vet ikke"
-      },
       "other": {
         "header": "Andre henvendelser",
         "text": "Noe spesielt dere vil informere om? Frivillig felt så vi forventer ikke noe spesielt her.",
@@ -81,13 +74,6 @@
         "field1": "Yes",
         "field2": "No",
         "field3": "Have not decided"
-      },
-      "digital": {
-        "header": "Digital event",
-        "text": "Do you wish to attend if itDAGENE 2022 is held digitally? We are currently planning and hoping we can host the event with physical attendance.",
-        "field1": "Yes",
-        "field2": "No",
-        "field3": "Not sure"
       },
       "other": {
         "header": "Other requests",
