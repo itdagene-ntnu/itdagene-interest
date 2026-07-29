@@ -3,16 +3,18 @@ import './Container.css';
 
 interface Props {
   title: string;
-  children?: JSX.Element[] | JSX.Element | string;
+  description?: string;
+  children?: React.ReactNode;
 }
 
-const Container = (props: Props): JSX.Element => {
-  return (
-    <div className="box shadow">
-      <h1 className="title">{props.title}</h1>
-      {props.children}
-    </div>
-  );
-};
+const Container = ({ title, description, children }: Props): JSX.Element => (
+  <section className="form-container" aria-labelledby="interest-form-title">
+    <header className="form-container__header">
+      <h2 id="interest-form-title">{title}</h2>
+      {description && <p>{description}</p>}
+    </header>
+    {children}
+  </section>
+);
 
 export default Container;
