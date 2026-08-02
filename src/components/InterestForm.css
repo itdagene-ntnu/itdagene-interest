@@ -146,15 +146,11 @@
 }
 
 .choice-grid label:has(input:checked) {
-  border-color: #9fc9b7;
-  background: #f4faf7;
-  color: var(--color-ink);
+  border-color: rgba(7, 120, 188, 0.3);
+  background: #eef8fc;
+  color: var(--color-brand-dark);
   font-weight: 600;
-  box-shadow: inset 3px 0 0 var(--color-success);
-}
-
-.choice-group--complete .choice-grid input:checked {
-  accent-color: var(--color-success);
+  box-shadow: inset 3px 0 0 var(--color-brand);
 }
 
 .choice-group--error .choice-grid {
