@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 import { renderToStaticMarkup } from 'react-dom/server';
 import InterestForm from './InterestForm';
 
@@ -51,6 +51,86 @@ describe('InterestForm reCAPTCHA integration', () => {
     });
 
     expect(document.activeElement.id).toBe('companyName');
+
+    ReactDOM.unmountComponentAtNode(container);
+    container.remove();
+  });
+
+  it('applies the accepted state after a valid text field has been blurred', async () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    await act(async () => {
+      ReactDOM.render(
+        <InterestForm
+          english={false}
+          setStatus={jest.fn()}
+          setSubmitting={jest.fn()}
+        />,
+        container
+      );
+    });
+
+    const companyName = container.querySelector('#companyName');
+    const companyField = companyName.closest('.form-field');
+
+    expect(companyField.getAttribute('data-complete')).toBeNull();
+
+    await act(async () => {
+      Simulate.change(companyName, {
+        target: { name: 'companyName', value: 'Computas' },
+      });
+      Simulate.blur(companyName, { target: { name: 'companyName' } });
+      await Promise.resolve();
+    });
+
+    expect(companyField.getAttribute('data-complete')).toBe('true');
+    expect(companyField.classList.contains('form-field--complete')).toBe(true);
+    expect(container.querySelector('.field-completion')).toBeNull();
+
+    ReactDOM.unmountComponentAtNode(container);
+    container.remove();
+  });
+
+  it('marks selected choices complete without hiding their native controls', async () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    await act(async () => {
+      ReactDOM.render(
+        <InterestForm
+          english={false}
+          setStatus={jest.fn()}
+          setSubmitting={jest.fn()}
+        />,
+        container
+      );
+    });
+
+    const dayOne = container.querySelector('#day-1');
+    const dayGroup = dayOne.closest('.choice-group');
+    const confirmation = container.querySelector('#confirm');
+    const confirmationSection = confirmation.closest('.form-confirmation');
+
+    await act(async () => {
+      Simulate.change(dayOne, {
+        target: {
+          name: 'day',
+          type: 'radio',
+          value: 'Dag 1',
+          checked: true,
+        },
+      });
+      Simulate.change(confirmation, {
+        target: { name: 'confirm', type: 'checkbox', checked: true },
+      });
+      await Promise.resolve();
+    });
+
+    expect(dayOne.type).toBe('radio');
+    expect(dayGroup.getAttribute('data-complete')).toBe('true');
+    expect(confirmation.type).toBe('checkbox');
+    expect(confirmationSection.getAttribute('data-complete')).toBe('true');
 
     ReactDOM.unmountComponentAtNode(container);
     container.remove();

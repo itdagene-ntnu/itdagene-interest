@@ -127,9 +127,13 @@ const TextField = ({
   onBlur,
 }: TextFieldProps): JSX.Element => {
   const hasError = Boolean(error && touched);
+  const isComplete = Boolean(touched && value.trim() && !error);
   const errorId = `${id}-error`;
   return (
-    <div className="form-field">
+    <div
+      className={`form-field${isComplete ? ' form-field--complete' : ''}`}
+      data-complete={isComplete ? 'true' : undefined}
+    >
       <label htmlFor={id}>
         {label} <span aria-hidden="true">*</span>
       </label>
@@ -163,6 +167,7 @@ const RadioGroup = ({
   description,
   name,
   options,
+  value,
   error,
   touched,
   onChange,
@@ -173,18 +178,23 @@ const RadioGroup = ({
   description: string;
   name: 'day' | 'marathon';
   options: RadioOption[];
+  value: string;
   error?: string;
   touched?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
 }): JSX.Element => {
   const hasError = Boolean(error && touched);
+  const isComplete = Boolean(value && !error);
   const descriptionId = `${id}-description`;
   const errorId = `${id}-error`;
   return (
     <fieldset
       aria-describedby={`${descriptionId}${hasError ? ` ${errorId}` : ''}`}
-      className={hasError ? 'choice-group choice-group--error' : 'choice-group'}
+      className={`choice-group${hasError ? ' choice-group--error' : ''}${
+        isComplete ? ' choice-group--complete' : ''
+      }`}
+      data-complete={isComplete ? 'true' : undefined}
     >
       <legend>
         {label} <span aria-hidden="true">*</span>
@@ -335,6 +345,7 @@ class InterestForm extends React.Component<Props> {
                   { label: info.wishes.day.field3, value: 'Ingen' },
                 ]}
                 touched={touched.day}
+                value={values.day}
               />
               <RadioGroup
                 description={info.wishes.marathon.text}
@@ -353,8 +364,20 @@ class InterestForm extends React.Component<Props> {
                   },
                 ]}
                 touched={touched.marathon}
+                value={values.marathon}
               />
-              <div className="form-field">
+              <div
+                className={`form-field${
+                  touched.message && values.message.trim() && !errors.message
+                    ? ' form-field--complete'
+                    : ''
+                }`}
+                data-complete={
+                  touched.message && values.message.trim() && !errors.message
+                    ? 'true'
+                    : undefined
+                }
+              >
                 <label htmlFor="message">{info.wishes.other.header}</label>
                 <p className="field-description" id="message-description">
                   {info.wishes.other.text}
@@ -389,7 +412,12 @@ class InterestForm extends React.Component<Props> {
               </div>
             </Section>
 
-            <section className="form-confirmation">
+            <section
+              className={`form-confirmation${
+                values.confirm ? ' form-confirmation--complete' : ''
+              }`}
+              data-complete={values.confirm ? 'true' : undefined}
+            >
               <label htmlFor="confirm">
                 <Field
                   aria-describedby={
