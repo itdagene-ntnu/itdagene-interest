@@ -36,12 +36,16 @@ _All commands under should be run from the folder itdagene-interest_
 - `REACT_APP_RECAPTCHA_SITEKEY`: The site recatcha key consumed by the form component
 - `REACT_APP_YEAR`: What year of itdagene should this form be
 
+The visual tokens are synchronized from `itdagene-webapp/styles/tokens.css`.
+Run `yarn tokens:sync` from the sibling webapp repository after changing the shared design system.
+
 ```zsh
 # Install dependencies
 $ yarn
 
 # Start the dev server
-$ yarn start
+$ yarn dev
+$ # open http://localhost:3000
 ```
 
 #### API
