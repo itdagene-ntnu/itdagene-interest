@@ -26,7 +26,8 @@
     "start": "yarn dev",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "format:check": "prettier --check ."
   },
   "prettier": {
     "singleQuote": true

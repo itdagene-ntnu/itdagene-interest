@@ -20,6 +20,16 @@ jobs:
           key: deps-{{ checksum "yarn.lock" }}
 
       - run:
+          name: check formatting
+          command: |
+            yarn format:check
+
+      - run:
+          name: test
+          command: |
+            yarn test
+
+      - run:
           name: build
           command: |
             yarn build
