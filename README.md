@@ -54,11 +54,13 @@ $ yarn dev
 # Run the tests
 $ yarn test
 
-# Check formatting
+# Check formatting, and fix it
 $ yarn prettier
+$ yarn prettier:fix
 
-# Lint the code
+# Lint the code, and fix what can be fixed automatically
 $ yarn lint
+$ yarn lint:fix
 
 # Build for production into build/ and preview the result
 $ yarn build
