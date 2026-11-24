@@ -33,8 +33,13 @@ Some environment variables must be set for the Webform and API to work.
 
 _All commands under should be run from the folder itdagene-interest_
 
+The Webform is built with [Vite](https://vite.dev) and requires **Node.js 22.22.2 or newer**.
+
+- `REACT_APP_API_LOCATION`: The URL of the API endpoint the form is submitted to
 - `REACT_APP_RECAPTCHA_SITEKEY`: The site recatcha key consumed by the form component
 - `REACT_APP_YEAR`: What year of itdagene should this form be
+
+Defaults are set in `.env` (used by `yarn dev`) and `.env.production` (used by `yarn build`). The values are built into the page, so never put secrets in them.
 
 The visual tokens are synchronized from `itdagene-webapp/styles/tokens.css`.
 Run `yarn tokens:sync` from the sibling webapp repository after changing the shared design system.
@@ -45,8 +50,19 @@ $ yarn
 
 # Start the dev server
 $ yarn dev
-$ # open http://localhost:3000
+
+# Run the tests
+$ yarn test
+
+# Check formatting
+$ yarn format:check
+
+# Build for production into build/ and preview the result
+$ yarn build
+$ yarn preview
 ```
+
+CI runs `yarn format:check`, `yarn test` and `yarn build` on every push, so run them before pushing.
 
 #### API
 
