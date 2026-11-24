@@ -17,45 +17,51 @@ vi.mock('react-recaptcha', () => ({
 
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 
-const fire = async (simulate) => {
+const fire = async (...simulations) => {
   await act(async () => {
-    simulate();
+    simulations.forEach((simulate) => simulate());
     await flush();
   });
 };
 
-const renderForm = async () => {
+const mounted = [];
+
+afterEach(() => {
+  while (mounted.length) {
+    const { root, container } = mounted.pop();
+    act(() => root.unmount());
+    container.remove();
+  }
+});
+
+const formElement = (english) => (
+  <InterestForm english={english} setStatus={vi.fn()} setSubmitting={vi.fn()} />
+);
+
+const renderForm = async ({ english = false } = {}) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
   const root = createRoot(container);
+  mounted.push({ root, container });
 
   await act(async () => {
-    root.render(
-      <InterestForm
-        english={false}
-        setStatus={vi.fn()}
-        setSubmitting={vi.fn()}
-      />
-    );
+    root.render(formElement(english));
+    await flush();
   });
 
-  const cleanup = () => {
-    act(() => root.unmount());
-    container.remove();
+  const setEnglish = async (value) => {
+    await act(async () => {
+      root.render(formElement(value));
+      await flush();
+    });
   };
 
-  return { container, cleanup };
+  return { container, setEnglish };
 };
 
-describe('InterestForm reCAPTCHA integration', () => {
+describe('InterestForm', () => {
   it('provides the explicit-render callback required after a delayed API load', () => {
-    renderToStaticMarkup(
-      <InterestForm
-        english={false}
-        setStatus={vi.fn()}
-        setSubmitting={vi.fn()}
-      />
-    );
+    renderToStaticMarkup(formElement(false));
 
     expect(mockRecaptchaProps.render).toBe('explicit');
     expect(mockRecaptchaProps.onloadCallback).toEqual(expect.any(Function));
@@ -63,24 +69,19 @@ describe('InterestForm reCAPTCHA integration', () => {
   });
 
   it('moves focus to the first invalid field after submission', async () => {
-    const { container, cleanup } = await renderForm();
+    const { container } = await renderForm();
 
-    await act(async () => {
+    await fire(() =>
       container
         .querySelector('form')
-        .dispatchEvent(
-          new Event('submit', { bubbles: true, cancelable: true })
-        );
-      await flush();
-    });
+        .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
+    );
 
     expect(document.activeElement.id).toBe('companyName');
-
-    cleanup();
   });
 
   it('applies the accepted state after a valid text field has been blurred', async () => {
-    const { container, cleanup } = await renderForm();
+    const { container } = await renderForm();
 
     const companyName = container.querySelector('#companyName');
     const companyField = companyName.closest('.form-field');
@@ -99,12 +100,49 @@ describe('InterestForm reCAPTCHA integration', () => {
     expect(companyField.getAttribute('data-complete')).toBe('true');
     expect(companyField.classList.contains('form-field--complete')).toBe(true);
     expect(container.querySelector('.field-completion')).toBeNull();
+  });
 
-    cleanup();
+  it('keeps an autofilled field valid when change and blur happen together', async () => {
+    const { container } = await renderForm();
+
+    const companyName = container.querySelector('#companyName');
+    const companyField = companyName.closest('.form-field');
+
+    await fire(
+      () =>
+        Simulate.change(companyName, {
+          target: { name: 'companyName', value: 'Computas' },
+        }),
+      () => Simulate.blur(companyName, { target: { name: 'companyName' } })
+    );
+
+    expect(companyName.getAttribute('aria-invalid')).toBe('false');
+    expect(container.querySelector('#companyName-error')).toBeNull();
+    expect(companyField.getAttribute('data-complete')).toBe('true');
+  });
+
+  it('shows error messages in the selected language after switching', async () => {
+    const { container, setEnglish } = await renderForm({ english: false });
+
+    const companyName = container.querySelector('#companyName');
+
+    await fire(() =>
+      Simulate.blur(companyName, { target: { name: 'companyName' } })
+    );
+
+    expect(container.querySelector('#companyName-error').textContent).toBe(
+      'Dette feltet er obligatorisk.'
+    );
+
+    await setEnglish(true);
+
+    expect(container.querySelector('#companyName-error').textContent).toBe(
+      'This field is required.'
+    );
   });
 
   it('marks selected choices complete without hiding their native controls', async () => {
-    const { container, cleanup } = await renderForm();
+    const { container } = await renderForm();
 
     const dayOne = container.querySelector('#day-1');
     const dayGroup = dayOne.closest('.choice-group');
@@ -131,7 +169,5 @@ describe('InterestForm reCAPTCHA integration', () => {
     expect(dayGroup.getAttribute('data-complete')).toBe('true');
     expect(confirmation.type).toBe('checkbox');
     expect(confirmationSection.getAttribute('data-complete')).toBe('true');
-
-    cleanup();
   });
 });
