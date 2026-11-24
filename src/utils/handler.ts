@@ -1,29 +1,27 @@
 import axios from 'axios';
 import { FormValues } from '../components/InterestForm';
-import dotenv from 'dotenv';
 
 export enum RequestStatus {
   pending = 'PENDING',
   success = 'SUCCESS',
-  failure = 'FAILURE'
+  failure = 'FAILURE',
 }
 
 export const submitHandler = (
-  values: FormValues,
+  values: Omit<FormValues, 'confirm'>,
   callBack: (status: RequestStatus) => void
 ): void => {
-  dotenv.config();
-  const API_LOCATION = process.env.REACT_APP_API_LOCATION;
+  const API_LOCATION = import.meta.env.REACT_APP_API_LOCATION;
   callBack(RequestStatus.pending);
   axios({
     method: 'post',
     url: API_LOCATION,
-    data: { ...values }
+    data: { ...values },
   })
-    .then(function(res): void {
+    .then(function (res): void {
       callBack(RequestStatus.success);
     })
-    .catch(function(error): void {
+    .catch(function (error): void {
       callBack(RequestStatus.failure);
     });
 };

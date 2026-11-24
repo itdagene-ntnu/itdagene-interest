@@ -1,5 +1,4 @@
 import React, { RefObject, useEffect } from 'react';
-import dotenv from 'dotenv';
 import textarray from '../utils/text.json';
 import { Section } from './Section';
 import './InterestForm.css';
@@ -7,8 +6,6 @@ import { Field, Formik, FormikProps } from 'formik';
 import Recaptcha from 'react-recaptcha';
 import { RequestStatus, submitHandler } from '../utils/handler';
 import { createValidationSchema } from '../utils/interestValidation';
-
-dotenv.config();
 
 export interface FormValues {
   companyName: string;
@@ -231,7 +228,7 @@ class InterestForm extends React.Component<Props> {
   private formRef = React.createRef<HTMLFormElement>();
 
   public render(): JSX.Element {
-    const siteKey = process.env.REACT_APP_RECAPTCHA_SITEKEY;
+    const siteKey = import.meta.env.REACT_APP_RECAPTCHA_SITEKEY;
     const info = this.props.english ? textarray.english : textarray.norwegian;
     const submitLabel = this.props.english
       ? 'Submit interest'
@@ -241,8 +238,9 @@ class InterestForm extends React.Component<Props> {
       <Formik
         initialValues={initialValues}
         onSubmit={(values): void => {
-          const submission = { ...values, english: this.props.english };
-          delete submission.confirm;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { confirm, ...fields } = values;
+          const submission = { ...fields, english: this.props.english };
           this.props.setSubmitting();
           submitHandler(submission, this.props.setStatus);
         }}

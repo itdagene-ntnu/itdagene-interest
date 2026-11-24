@@ -6,18 +6,20 @@ import InterestForm from './InterestForm';
 
 let mockRecaptchaProps;
 
-jest.mock('react-recaptcha', () => (props) => {
-  mockRecaptchaProps = props;
-  return null;
-});
+vi.mock('react-recaptcha', () => ({
+  default: (props) => {
+    mockRecaptchaProps = props;
+    return null;
+  },
+}));
 
 describe('InterestForm reCAPTCHA integration', () => {
   it('provides the explicit-render callback required after a delayed API load', () => {
     renderToStaticMarkup(
       <InterestForm
         english={false}
-        setStatus={jest.fn()}
-        setSubmitting={jest.fn()}
+        setStatus={vi.fn()}
+        setSubmitting={vi.fn()}
       />
     );
 
@@ -34,8 +36,8 @@ describe('InterestForm reCAPTCHA integration', () => {
       ReactDOM.render(
         <InterestForm
           english={false}
-          setStatus={jest.fn()}
-          setSubmitting={jest.fn()}
+          setStatus={vi.fn()}
+          setSubmitting={vi.fn()}
         />,
         container
       );
@@ -64,8 +66,8 @@ describe('InterestForm reCAPTCHA integration', () => {
       ReactDOM.render(
         <InterestForm
           english={false}
-          setStatus={jest.fn()}
-          setSubmitting={jest.fn()}
+          setStatus={vi.fn()}
+          setSubmitting={vi.fn()}
         />,
         container
       );
@@ -100,8 +102,8 @@ describe('InterestForm reCAPTCHA integration', () => {
       ReactDOM.render(
         <InterestForm
           english={false}
-          setStatus={jest.fn()}
-          setSubmitting={jest.fn()}
+          setStatus={vi.fn()}
+          setSubmitting={vi.fn()}
         />,
         container
       );
