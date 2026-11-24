@@ -2,7 +2,7 @@ import React, { RefObject, useEffect } from 'react';
 import textarray from '../utils/text.json';
 import { Section } from './Section';
 import './InterestForm.css';
-import { Field, Formik, FormikProps } from 'formik';
+import { Field, Formik, FormikProps, useFormikContext } from 'formik';
 import Recaptcha from 'react-recaptcha';
 import { RequestStatus, submitHandler } from '../utils/handler';
 import { createValidationSchema } from '../utils/interestValidation';
@@ -224,6 +224,16 @@ const RadioGroup = ({
   );
 };
 
+const ValidateCommittedValues = ({ english }: { english: boolean }): null => {
+  const { touched, validateForm } = useFormikContext<FormValues>();
+
+  useEffect(() => {
+    validateForm();
+  }, [english, touched, validateForm]);
+
+  return null;
+};
+
 class InterestForm extends React.Component<Props> {
   private formRef = React.createRef<HTMLFormElement>();
 
@@ -244,6 +254,7 @@ class InterestForm extends React.Component<Props> {
           this.props.setSubmitting();
           submitHandler(submission, this.props.setStatus);
         }}
+        validateOnBlur={false}
         validationSchema={createValidationSchema(this.props.english)}
       >
         {({
@@ -258,6 +269,7 @@ class InterestForm extends React.Component<Props> {
           submitCount,
         }: FormikProps<FormValues>): JSX.Element => (
           <form noValidate onSubmit={handleSubmit} ref={this.formRef}>
+            <ValidateCommittedValues english={this.props.english} />
             <FormErrorFocus
               english={this.props.english}
               errors={errors}

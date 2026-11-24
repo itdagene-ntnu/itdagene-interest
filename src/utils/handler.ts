@@ -18,10 +18,6 @@ export const submitHandler = (
     url: API_LOCATION,
     data: { ...values },
   })
-    .then(function (res): void {
-      callBack(RequestStatus.success);
-    })
-    .catch(function (error): void {
-      callBack(RequestStatus.failure);
-    });
+    .then((): void => callBack(RequestStatus.success))
+    .catch((): void => callBack(RequestStatus.failure));
 };

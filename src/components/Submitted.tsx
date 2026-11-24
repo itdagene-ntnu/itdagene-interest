@@ -1,4 +1,3 @@
-import React from 'react';
 import './Submitted.css';
 import { RequestStatus } from '../utils/handler';
 import { Pending, Success, Failure } from './Animations';
