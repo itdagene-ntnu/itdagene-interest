@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Pending = (): JSX.Element => (
   <svg
     width="100px"
@@ -14,8 +12,6 @@ export const Pending = (): JSX.Element => (
       cy="50"
       r="35.4977"
       fill="none"
-      ng-attr-stroke="{{config.c1}}"
-      ng-attr-stroke-width="{{config.width}}"
       stroke="#037bb4"
       strokeWidth="4"
     >
@@ -45,8 +41,6 @@ export const Pending = (): JSX.Element => (
       cy="50"
       r="7.67462"
       fill="none"
-      ng-attr-stroke="{{config.c2}}"
-      ng-attr-stroke-width="{{config.width}}"
       stroke="#037bb4"
       strokeWidth="4"
     >

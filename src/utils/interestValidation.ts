@@ -2,9 +2,7 @@ import * as Yup from 'yup';
 
 const supportedCharacters = /^([ÆØÅæøåA-Z,a-z,0-9,(,),-,_,&,.,.,,!,?])/;
 
-export const createValidationSchema = (
-  english: boolean
-): Yup.ObjectSchema<any> => {
+export const createValidationSchema = (english: boolean) => {
   const messages = english
     ? {
         required: 'This field is required.',

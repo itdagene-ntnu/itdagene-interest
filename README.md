@@ -55,14 +55,17 @@ $ yarn dev
 $ yarn test
 
 # Check formatting
-$ yarn format:check
+$ yarn prettier
+
+# Lint the code
+$ yarn lint
 
 # Build for production into build/ and preview the result
 $ yarn build
 $ yarn preview
 ```
 
-CI runs `yarn format:check`, `yarn test` and `yarn build` on every push, so run them before pushing.
+CI runs `yarn prettier`, `yarn lint`, `yarn test` and `yarn build` on every push, so run them before pushing.
 
 #### API
 
