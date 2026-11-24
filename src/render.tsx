@@ -3,17 +3,14 @@ import './index.css';
 import Container from './components/Container';
 import InterestForm from './components/InterestForm';
 import { Submitted } from './components/Submitted';
-import dotenv from 'dotenv';
 import { RequestStatus } from './utils/handler';
-
-dotenv.config();
 
 const Render = (): JSX.Element => {
   const [status, setStatus] = useState<RequestStatus>(RequestStatus.pending);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [english, setEnglish] = useState<boolean>(false);
   const showSubmission = useCallback((): void => setSubmitted(true), []);
-  const year = process.env.REACT_APP_YEAR;
+  const year = import.meta.env.REACT_APP_YEAR;
 
   useEffect(() => {
     document.documentElement.lang = english ? 'en' : 'nb';
