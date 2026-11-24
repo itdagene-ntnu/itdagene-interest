@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://interesse.itdagene.no",
   "dependencies": {
-    "@types/node": "^18.7.16",
+    "@types/node": "^26.6.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-recaptcha": "^2.3.4",
